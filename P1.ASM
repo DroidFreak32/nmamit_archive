@@ -1,0 +1,19 @@
+ASSUME CS:CODE, DS:DATA
+DATA    SEGMENT
+        ORG 3000H
+        NUM1 DB 22H
+        NUM2 DB 32H
+        SUM DB 00H
+DATA    ENDS
+CODE    SEGMENT
+        ASSUME CS:CODE, DS:DATA
+START:  MOV AX, DATA
+        MOV DS, AX
+        MOV AL, NUM1
+        MOV BL, NUM2
+        ADD AL, BL
+        MOV SUM, AL
+        MOV AH, 4CH
+        INT 21H
+CODE ENDS
+END START
