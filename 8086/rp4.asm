@@ -1,10 +1,11 @@
 ;Reading a character from KeyBoard
 ;01H has built in instructions to read char from KB. And stores in AL.
-;02H has built in instructions to Display char to screen.
+;02H has built in instructions to Display char in AL to screen.
 CODE SEGMENT
 ASSUME CS:CODE
-START:  MOV AH,01H
-	INT 21H ; Performs the 01H instr.
+START:
+	MOV AH,01H
+	INT 21H
 	MOV DL,AL
 	MOV AH,02H
 	INT 21H

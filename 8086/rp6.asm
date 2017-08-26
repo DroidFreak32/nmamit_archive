@@ -13,11 +13,11 @@ START:
 	LEA DI,AR2	;load start address of arr1 in SI
 	MOV CX,LEN	;Initialize counter with length of array
 BACK:
-	MOV AL,[SI] ;load the value in address of SI in AL
+	MOV AL,[SI] ;load the value in address of SI to AL
 	MOV [DI],AL	;store the value of AL in address pointed by DI (start of arr2)
-	INC SI
-	INC DI
-	LOOP BACK
+	INC SI		;arr1 ++
+	INC DI		;arr2 ++
+	LOOP BACK	;Loop. (Implicitly stops looping when SI has no value?)
 	MOV AH,4CH
 	INT 21H
 CODE ENDS

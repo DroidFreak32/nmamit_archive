@@ -1,6 +1,6 @@
 Data segment
- a dw 10e3h
- b dw 103eh
+ a dw 5678h
+ b dw 1234h
  c dw ?
 Data ends
 Code segment
@@ -8,8 +8,9 @@ Code segment
  Start:Mov AX,Data
        Mov DS,AX
        Mov AX,a
-       SUB AX,b
-       mov c,AX
+;MOV AH,00H to remove the junk value in AH
+       div b
+       MOV c,AX
        mov AH,4Ch
        int 21h
      Code ends

@@ -1,7 +1,8 @@
-; Binary Search
+; Binary Search 16 bit
+; REFER the other BSearch code.
 DATA SEGMENT
 ARR DW 1234H,2345H,3456H,4567H,5678H
-LEN DB $-ARR ;
+LEN DB $-ARR      
 KEY DW 2345H
 MID DB ?
 FOUND DB 10,13,"FOUND$"
@@ -13,9 +14,9 @@ START:
       MOV AX,DATA
       MOV DS,AX
       MOV CL,0
-      SHR LEN,01
-      DEC LEN
-      MOV DL,00   ;LOW
+      SHR LEN,01        ;16 bit -> NO of addrs will be 2x. So divide by 2
+      DEC LEN           ;5 elements, but index starts from 0
+      MOV DL,00         
       MOV DH,LEN ;HIGH
       MOV BX,0000H
 UP:
