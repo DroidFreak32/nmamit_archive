@@ -18,7 +18,7 @@ START:
 	LEA si,STR1						; Point SI to 0th index of STR1
 	LEA di,STR2						; Point DI to 0th index of STR2
 	CALL READSTR					; This func will store the string and it's length in DS
-	mov len,Cl 						; Store the lenhtn in len
+	mov len,Cl 						; Store the length in len
 	dec SI 							; SI is out of bounds, so bring it back
 	MOV CL,00 						; Now CL is used to store STR2's length
 ; Loop to Copy values in STR1 backwards into STR2
