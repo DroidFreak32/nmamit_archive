@@ -1,6 +1,6 @@
 Data segment
- a db 2h
- b db 2h
+ a db 19h
+ b db 20h
  c db ?
 Data ends
 Code segment

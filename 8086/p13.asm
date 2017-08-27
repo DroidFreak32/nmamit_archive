@@ -1,15 +1,14 @@
 ; Binary Search
-; LOW , HUGH USE DL, DH
+; LOW , HIGH USE DL, DH
 ; ADDRESS BX,SI,DI
 
-
 DATA SEGMENT
-ARR DW 1234H,2345H,3456H,4567H,5678H
-LEN DB $-ARR                              ;Address of last location-first=length
-KEY DW 5478H
-MID DB ?
-FOUND DB 10,13,"FOUND AT POSITION $"
-NOTFOUND DB 10,13,"NOTFOUND $"
+	ARR DW 1234H,2345H,3456H,4567H,5678H
+	LEN DB $-ARR 						;Address of last location-first=length
+	KEY DW 5478H
+	MID DB ?
+	FOUND DB 10,13,"FOUND AT POSITION $"
+	NOTFOUND DB 10,13,"NOTFOUND $"
 DATA ENDS
 CODE SEGMENT
 ASSUME CS:CODE,DS:DATA
@@ -54,7 +53,7 @@ FO:
 	MOV AH,09H
 	INT 21H
 	INC mid
-	MOV DL,MID 				;START Display hexa to ASCII procedure, HEX value is MID position number
+	MOV DL,MID 				;START Display hexa to ASCII procedure, HEX value is MID position number.
 	MOV CL,04H
 	SHR DL,CL
 	CMP dl,09H
