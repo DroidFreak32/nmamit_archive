@@ -1,0 +1,47 @@
+<html>
+	<head>
+		<style>
+		body
+			{
+				background-color:black;
+				color:white;
+				font-family:"Palatino";
+			}
+		</style>
+	</head>
+	<body>
+		<!--HEADER WITH LOGO-->
+		<div style="top:0px" >
+			<img src="logo.png" height="150" width="200" style="float:left">
+			<img src="logo.png" height="150" width="200" style="float:right">
+			<div style="color:white;
+					text-align:center;
+					font-family:castellar; 
+					font-size:60px;
+					padding-top:40px;
+					text-shadow: 1px 1px 2px white, 0 0 2px white, 0 0 5px white;" >
+				<u>HOGWARTS LIBRARY</u>
+			</div>
+		<br>
+		<br>
+		<br>
+	    <br>
+		<form name="Project" action="createmember.php" method="post" enctype="multipart/form-data">
+			<table>
+				<tr>
+					<td>MEMBERSHIP NUMBER ALLOTED</td>
+					<td><input name="mno" type="text" action="createmember.php"></td>
+				</tr>
+				<tr>
+					<td>THE PAYMENT HAS BEEN RECEIVED</td>
+					<td><input name="mm" type="text" action="createmember.php"></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td><input value="Submit Form" type="submit"></td>
+					<td><input value="Clear Form" type="reset"></td>
+				</tr>
+			</table>
+		</form>
+	</body>
+</html>

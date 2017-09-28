@@ -1,0 +1,110 @@
+//creating librarian table
+
+create table librarian(
+username char(10) PRIMARY KEY,
+password char(160) NOT NULL
+);
+
+$sql = "create table librarian(\n"
+    . "username char(10) PRIMARY KEY,\n"
+    . "password char(40) NOT NULL\n"
+    . ");";
+
+
+INSERT INTO `library`.`librarian` (`username`, `password`) VALUES ('IrmaPrince', '941335272630119c367352790d961f2e066481e6');
+$sql = "INSERT INTO `library`.`librarian` (`username`, `password`) VALUES (\'IrmaPrince\', \'941335272630119c367352790d961f2e066481e6\');";
+
+create table temp_member
+(
+   Membership_no char(13) PRIMARY KEY,
+   Fname char(50) NOT NULL,
+   Mname char(50)  DEFAULT NULL,
+   Lname char(50) NOT NULL,
+   Sex char(1) NOT NULL,
+   Aadhar_no char(12) NOT NULL,
+   Birth_Date date,
+   Address_line1 char(100) NOT NULL,
+   Address_line2 char(100) DEFAULT NULL,
+   City char(30) NOT NULL,
+   Pincode char(10) NOT NULL,
+   State char(15) NOT NULL,
+   Country char(15) NOT NULL,
+   ContactNo1 char(10) NOT NULL,
+   ContactNo2 char(10) DEFAULT NULL,
+   EmailId char(50) NOT NULL
+);
+
+
+create table temp_uname
+(
+  username char(15),
+  password char(15),
+  membership_no char(13) primary key,
+  Foreign key(membership_no) references temp_member(Membership_no) on delete cascade on update cascade
+);
+
+create table guest_feedback
+(
+   Fname char(50) NOT NULL,
+   Mname char(50)  DEFAULT NULL,
+   Lname char(50) NOT NULL,
+   Sex char(1) DEFAULT 'F' NOT NULL,
+   ContactNo char(10) NOT NULL,
+   EmailId char(50) NOT NULL,
+   Experience INT DEFAULT 5 NOT NULL,
+   Staff INT DEFAULT 5 NOT NULL,
+   Cleanliness INT DEFAULT 5 NOT NULL,
+   Ventilation INT DEFAULT 5 NOT NULL,
+   Effeciency INT DEFAULT 5 NOT NULL,
+   Facilities INT DEFAULT 5 NOT NULL,
+   Quality INT DEFAULT 5 NOT NULL,
+   Quantity INT DEFAULT 5 NOT NULL,
+   Updateness INT DEFAULT 5 NOT NULL,
+   Condition INT DEFAULT 5 NOT NULL,
+   Variety INT DEFAULT 5 NOT NULL,
+   Overall_impression INT DEFAULT 5 NOT NULL,
+   Source char(25) NOT NULL,
+   Recommendation INT,
+   Suggestion TEXT DEFAULT NULL,
+   Date DATE NOT NULL,
+   CONSTRAINT GFEEDBACK
+   Primary key(Fname,Mname,Lname,ContactNo)
+);
+
+SELECT * FROM guest_feedback  // To view the feedback of all guests
+
+SELECT AVG(Experience),AVG(Staff),AVG(Cleanliness),AVG(Ventilation),AVG(Effeciency),AVG(Facilities),
+AVG(Quality),AVG(Quantity),AVG(Updateness),AVG(`Condition`)         //Condition is a keyword
+,AVG(Variety),AVG(Overall_impression) FROM guest_feedback;        //To view the average of all feedbacks 
+
+SELECT AVG(Experience),AVG(Staff),AVG(Cleanliness),AVG(Ventilation),AVG(Effeciency),AVG(Facilities),
+AVG(Quality),AVG(Quantity),AVG(Updateness),AVG(`Condition`)      
+,AVG(Variety),AVG(Overall_impression) FROM guest_feedback
+WHERE Date BETWEEN '2015-02-02' AND '2019-02-02' //SPECIFY DATE
+
+create table Member
+(
+   Membership_no char(13) PRIMARY KEY,
+   Fname char(50) NOT NULL,
+   Mname char(50)  DEFAULT NULL,
+   Lname char(50) NOT NULL,
+   Sex char(1) NOT NULL,
+   Aadhar_no char(12) NOT NULL,
+   Birth_Date date,
+   Address_line1 char(100) NOT NULL,
+   Address_line2 char(100) DEFAULT NULL,
+   City char(30) NOT NULL,
+   Pincode char(10) NOT NULL,
+   State char(15) NOT NULL,
+   Country char(15) NOT NULL,
+   ContactNo1 char(10) NOT NULL,
+   ContactNo2 char(10) DEFAULT NULL,
+   EmailId char(50) NOT NULL,
+   Membership_Date date
+)
+
+create table member_login
+(
+    Membership_No char(13) PRIMARY KEY,
+    Password char(160) NOT NULL
+)

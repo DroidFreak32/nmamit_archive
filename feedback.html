@@ -1,0 +1,185 @@
+<html>
+	<head>
+		<style>
+		body
+			{
+				background-color:black;
+				color:white;
+				font-family:"Palatino";
+			}
+		</style>
+	</head>
+	<body>
+		<!--HEADER WITH LOGO-->
+		<div style="top:0px" >
+			<img src="logo.png" height="150" width="200" style="float:left">
+			<img src="logo.png" height="150" width="200" style="float:right">
+			<div style="color:white;
+					text-align:center;
+					font-family:castellar; 
+					font-size:60px;
+					padding-top:40px;
+					text-shadow: 1px 1px 2px white, 0 0 2px white, 0 0 5px white;" >
+				<u>HOGWARTS LIBRARY</u>
+			</div>
+		<br>
+		<br>
+		<br>
+	    <br>
+		Please fill the form below to give us your feedback about The Hogwarts Library. Your feedback will help us to build upon our positives and help improve
+		the negatives. This will not take more than a few minutes.<br>
+		<form name="Project" action="gfeedback.php" method="post" enctype="multipart/form-data">
+			<table>
+				<tr>
+					<td>FIRST NAME</td>
+					<td><input name="fname" type="text" required></td>
+				</tr>
+				<tr>
+					<td>MIDDLE NAME</td>
+					<td><input name="lname" type="text"></td>
+				</tr>
+				<tr>
+					<td>LAST NAME</td>
+					<td><input name="mname" type="text" required></td>
+				</tr>
+				<tr>
+					<td>SEX</td>
+					<td>MALE<input name="sex" type="radio"  value="M"></td>
+					<td>FEMALE<input name="sex" type="radio"  value="F" checked></td>
+				</tr>
+				<tr>
+					<td>CONTACT NUMBER</td>
+					<td><input name="cnum" type="text" required>
+				</tr>
+				<tr>
+					<td>EMAIL ID</td>
+					<td><input name="emailid" type="email" required></td>
+				</tr>
+				<br>
+				<br>	
+			</table>
+			<hr>
+			<table>
+				<tr>
+					<td>Experience at the library</td>
+					<td>1<input name="exp" type="radio"  value="1"></td>
+					<td>2<input name="exp" type="radio"  value="2"></td>
+					<td>3<input name="exp" type="radio"  value="3"></td>
+					<td>4<input name="exp" type="radio"  value="4"></td>
+					<td>5<input name="exp" type="radio"  value="5" checked></td>
+				</tr>
+				<tr>
+					<td>Interaction with the staff of the library</td>
+					<td>1<input name="staff" type="radio"  value="1"></td>
+					<td>2<input name="staff" type="radio"  value="2"></td>
+					<td>3<input name="staff" type="radio"  value="3"></td>
+					<td>4<input name="staff" type="radio"  value="4"></td>
+					<td>5<input name="staff" type="radio"  value="5" checked></td>
+				</tr>
+				<tr>
+					<td>Cleanliness and ambience</td>
+					<td>1<input name="cleanliness" type="radio"  value="1"></td>
+					<td>2<input name="cleanliness" type="radio"  value="2"></td>
+					<td>3<input name="cleanliness" type="radio"  value="3"></td>
+					<td>4<input name="cleanliness" type="radio"  value="4"></td>
+					<td>5<input name="cleanliness" type="radio"  value="5" checked></td>
+				</tr>
+				<tr>
+					<td>Lightning and ventilation</td>
+					<td>1<input name="ventilation" type="radio"  value="1"></td>
+					<td>2<input name="ventilation" type="radio"  value="2"></td>
+					<td>3<input name="ventilation" type="radio"  value="3"></td>
+					<td>4<input name="ventilation" type="radio"  value="4"></td>
+					<td>5<input name="ventilation" type="radio"  value="5" checked></td>
+				</tr>
+				<tr>
+					<td>Effecicency of the online library management system</td>
+					<td>1<input name="effeciency" type="radio"  value="1"></td>
+					<td>2<input name="effeciency" type="radio"  value="2"></td>
+					<td>3<input name="effeciency" type="radio"  value="3"></td>
+					<td>4<input name="effeciency" type="radio"  value="4"></td>
+					<td>5<input name="effeciency" type="radio"  value="5" checked></td>
+				</tr>
+				<tr>
+					<td>Equipments and Facilities</td>
+					<td>1<input name="facility" type="radio"  value="1"></td>
+					<td>2<input name="facility" type="radio"  value="2"></td>
+					<td>3<input name="facility" type="radio"  value="3"></td>
+					<td>4<input name="facility" type="radio"  value="4"></td>
+					<td>5<input name="facility" type="radio"  value="5" checked></td>
+				</tr>
+				<tr>
+					<td>Quality of the books available</td>
+					<td>1<input name="qty" type="radio"  value="1"></td>
+					<td>2<input name="qty" type="radio"  value="2"></td>
+					<td>3<input name="qty" type="radio"  value="3"></td>
+					<td>4<input name="qty" type="radio"  value="4"></td>
+					<td>5<input name="qty" type="radio"  value="5" checked></td>
+				</tr>
+				<tr>
+					<td>Sufficiency and availability</td>
+					<td>1<input name="suff" type="radio"  value="1"></td>
+					<td>2<input name="suff" type="radio"  value="2"></td>
+					<td>3<input name="suff" type="radio"  value="3"></td>
+					<td>4<input name="suff" type="radio"  value="4"></td>
+					<td>5<input name="suff" type="radio"  value="5" checked></td>
+				</tr>
+				<tr>
+					<td>Recency and Updateness</td>
+					<td>1<input name="updateness" type="radio"  value="1"></td>
+					<td>2<input name="updateness" type="radio"  value="2"></td>
+					<td>3<input name="updateness" type="radio"  value="3"></td>
+					<td>4<input name="updateness" type="radio"  value="4"></td>
+					<td>5<input name="updateness" type="radio"  value="5" checked></td>
+				</tr>
+				<tr>
+					<td>Physical Condition of the books</td>
+					<td>1<input name="condn" type="radio"  value="1"></td>
+					<td>2<input name="condn" type="radio"  value="2"></td>
+					<td>3<input name="condn" type="radio"  value="3"></td>
+					<td>4<input name="condn" type="radio"  value="4"></td>
+					<td>5<input name="condn" type="radio"  value="5" checked></td>
+				</tr>
+				<tr>
+					<td>Variety of reading material</td>
+					<td>1<input name="variety" type="radio"  value="1"></td>
+					<td>2<input name="variety" type="radio"  value="2"></td>
+					<td>3<input name="variety" type="radio"  value="3"></td>
+					<td>4<input name="variety" type="radio"  value="4"></td>
+					<td>5<input name="variety" type="radio"  value="5" checked></td>
+				</tr>
+				<tr>
+					<td>Overall impression</td>
+					<td>1<input name="overallrate" type="radio"  value="1"></td>
+					<td>2<input name="overallrate" type="radio"  value="2"></td>
+					<td>3<input name="overallrate" type="radio"  value="3"></td>
+					<td>4<input name="overallrate" type="radio"  value="4"></td>
+					<td>5<input name="overallrate" type="radio"  value="5" checked></td>
+				</tr>
+				<tr>
+					<td>How did you come to know about us?</td>
+					<td>Librarian<input name="src" type="radio"  value="Librarian"></td>
+					<td>Newspaper<input name="src" type="radio"  value="Newspaper"></td>
+					<td>Friends/Family<input name="src" type="radio"  value="Friends/Family"></td>
+					<td>Posters<input name="src" type="radio"  value="Posters"></td>
+					<td>Social media<input name="src" type="radio"  value="Social Media" checked></td>
+					<td>Others<input name="src" type="radio"  value="Others" checked></td>
+				</tr>
+				<tr>
+					<td>Would you recommend us to others?</td>
+					<td>Yes<input name="recc" type="radio"  value="1"></td>
+					<td>No<input name="recc" type="radio"  value="2"></td>
+				</tr>
+				<tr>
+					<td>Do you have any suggestions on how we can serve you better?</td>
+					<td><textarea name="suggestion" rows="5"cols="30" maxlength="1000"></textarea></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td><input value="Submit Form" type="submit"></td>
+					<td><input value="Clear Form" type="reset"></td>
+				</tr>
+			</table>
+		</form>
+	</body>
+</html>

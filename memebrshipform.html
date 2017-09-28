@@ -1,0 +1,223 @@
+<html>
+	<head>
+		<style>
+		body
+			{
+				background-color:black;
+				color:white;
+			}
+		span
+			{
+				visibility:hidden; 
+				color:red;
+			}
+		</style>
+		<script>
+			function validate()
+			{
+				var myform=document.Project;
+				//TO VALIDATE FIRST NAME
+				if ((!(isNaN(myform.mfname.value)))&&(myform.mfname.value!=""))//TO CHECK IF THE NAME IS A NUMBER
+				{
+						
+						document.getElementById('errorFname').style.visibility='visible';
+						document.getElementById('Mfname').style.border="2px solid #F00";
+						return false;
+                }
+				else
+				{
+					document.getElementById('errorFname').style.visibility='hidden';
+					document.getElementById('Mfname').style.border="1px solid black";
+				}
+				//TO VALIDATE MIDDLE NAME
+				if ((!(isNaN(myform.mmname.value)))&&(myform.mmname.value!=""))
+				{
+						document.getElementById('errorMname').style.visibility='visible';
+						document.getElementById('Mmname').style.border="2px solid #F00";
+						return false;
+                }
+				else
+				{
+					document.getElementById('errorMname').style.visibility='hidden';
+					document.getElementById('Mmname').style.border="1px solid black";
+				}
+				//TO VALIDATE LAST NAME
+				if ((!(isNaN(myform.mlname.value)))&&(myform.mlname.value!=""))
+				{
+					document.getElementById('errorLname').style.visibility='visible';
+					document.getElementById('Mlname').style.border="2px solid #F00";
+					return false;
+                }
+				else
+				{
+					document.getElementById('errorLname').style.visibility='hidden';
+					document.getElementById('Mlname').style.border="1px solid black";
+				}
+				//TO VALIDATE AADHAR CARD NUMBER
+				if(isNaN(myform.aadhar_no.value))
+				{
+					document.getElementById('errorAadhar_No').style.visibility='visible';
+					document.getElementById('Aadhar_no').style.border="2px solid #F00";
+					return false;
+                }
+				else
+				{
+					document.getElementById('errorAadhar_No').style.visibility='hidden';
+					document.getElementById('Aadhar_no').style.border="1px solid black";
+				}
+				
+				//TO VALIDATE CITY
+				if ((!(isNaN(myform.city.value)))&&(myform.city.value!=""))
+				{
+						document.getElementById('errorCity').style.visibility='visible';
+						document.getElementById('City').style.border="2px solid #F00";
+						return false;
+                }
+				else
+				{
+					document.getElementById('errorCity').style.visibility='hidden';
+					document.getElementById('City').style.border="1px solid black";
+				}
+				//TO VALIDATE STATE
+				if ((!(isNaN(myform.state.value)))&&(myform.state.value!=""))
+				{
+						document.getElementById('errorState').style.visibility='visible';
+						document.getElementById('State').style.border="2px solid #F00";
+						return false;
+                }
+				else
+				{
+					document.getElementById('errorState').style.visibility='hidden';
+					document.getElementById('State').style.border="1px solid black";
+				}
+				//TO VALIDATE PINCODE
+				if(isNaN(myform.pincode.value))
+				{
+					document.getElementById('errorPin').style.visibility='visible';
+					document.getElementById('Pin').style.border="2px solid #F00";
+					return false;
+                }
+				else
+				{
+					document.getElementById('errorPin').style.visibility='hidden';
+					document.getElementById('Pin').style.border="1px solid black";
+				}
+				//TO VALIDATE CONTACT NUMBER1
+				if(isNaN(myform.cnum1.value))
+				{
+					document.getElementById('errorCnum1').style.visibility='visible';
+					document.getElementById('Cnum1').style.border="2px solid #F00";
+					return false;
+                }
+				else
+				{
+					document.getElementById('errorCnum1').style.visibility='hidden';
+					document.getElementById('Cnum1').style.border="1px solid black";
+				}
+				//TO VALIDATE CONTACT NUMBER2
+				if(isNaN(myform.cnum2.value))
+				{
+					document.getElementById('errorCnum2').style.visibility='visible';
+					document.getElementById('Cnum2').style.border="2px solid #F00";
+					return false;
+                }
+				else
+				{
+					document.getElementById('errorCnum2').style.visibility='hidden';
+					document.getElementById('Cnum2').style.border="1px solid black";
+				}
+				return true;
+			}
+		</script>
+	</head>
+	<body>
+		<!--HEADER WITH LOGO-->
+		<div style="top:0px" >
+			<img src="logo.png" height="150" width="200" style="float:left">
+			<img src="logo.png" height="150" width="200" style="float:right">
+			<div style="color:white;
+					text-align:center;
+					font-family:castellar; 
+					font-size:60px;
+					padding-top:40px;
+					text-shadow: 1px 1px 2px white, 0 0 2px white, 0 0 5px white;" >
+				<u>HOGWARTS LIBRARY</u>
+			</div>
+		</div>
+		<br>
+		<br>
+		<br>
+		<br>
+		<!--WE NEED DIFFERENT IDS FOR ERRORS BCOZ WE WANT ONLY THE REQUIRED ERROR TO BE DISPLAYED-->
+		<!--ON CLICK VALIDATES THE FORM AFTER EVERY CLICK SO THAT WE CAN ACHIEVE LINE BY LINE VALIDATION-->
+		<!--ERROR MESSAGES ARE HIDDEN AND WILL BE MADE VISIBLE ONLY AFTER THE JAVASCRIPT CODE RUNS AND AN INVALID INPUT IS PRESENT-->
+		<form name="Project" onclick="return validate()" onsubmit="return validate()" action="mform1.php" method="post" enctype="multipart/form-data">
+			<table align="center">
+				<tr>
+					<td>FIRST NAME</td>
+					<td><input id="Mfname" name="mfname" type="text" required><span id="errorFname" >&nbsp &nbsp &nbsp *The field can take values only from a-z and A-Z </span><br></td>
+				</tr>
+				<tr>
+					<td>MIDDLE NAME</td>
+					<td><input id="Mmname" name="mmname" type="text" required><span id="errorMname" >&nbsp &nbsp &nbsp *The field can take values only from a-z and A-Z </span><br></td>
+				</tr>
+				<tr>
+					<td>LAST NAME</td>
+					<td><input id="Mlname" name="mlname" type="text" required><span id="errorLname" >&nbsp &nbsp &nbsp *The field can take values only from a-z and A-Z </span><br></td>
+				</tr>
+				<tr>
+					<td>SEX</td>
+					<td>MALE<input name="sex" type="radio" checked value="M"></td>
+					<td>FEMALE<input name="sex" type="radio" checked value="F"></td>
+				</tr>
+				<tr>
+					<td>AADHAR CARD NUMBER</td>
+					<td><input id="Aadhar_no" name="aadhar_no" type="text" required><span id="errorAadhar_No" >&nbsp &nbsp &nbsp *The field can take values only from 0-9 and length must be 12 digits</span><br></td>
+				</tr>
+				<tr>
+					<td>BIRTH DATE</td>
+					<td><input name="bdate" type="date" required></td>
+				</tr>
+				<tr>
+					<td>ADDRESS LINE 1</td>
+					<td><input name="addl1" type="text" required></td>
+				</tr>
+				<tr>
+					<td>ADDRESS LINE 2</td>
+					<td><input name="addl2" type="text" ></td>
+				</tr>
+				<tr>
+					<td>CITY</td>
+					<td><input id="City" name="city" type="text" required><span id="errorCity" >&nbsp &nbsp &nbsp *The field can take values only from a-z and A-Z </span><br></td>
+				</tr>
+				<tr>
+					<td>PINCODE</td>
+					<td><input id="Pincode" name="pincode" type="text" required><span id="errorPincode" >&nbsp &nbsp &nbsp *The field can take values only from 0-9</span><br></td>
+				</tr>
+				<tr>
+					<td>STATE</td>
+					<td><input name="state" type="text" id="State" required><span id="errorState" >&nbsp &nbsp &nbsp *The field can take values only from a-z and A-Z </span><br></td>
+				</tr>
+				<tr>
+					<td>COUNTRY</td>
+					<td><input id="Country" name="country" type="text" required><span id="errorCountry" >&nbsp &nbsp &nbsp *The field can take values only from a-z and A-Z </span><br></td>
+				</tr>
+				<tr>
+					<td>CONTACT NUMBER 1</td>
+					<td><input id="Cnum1" name="cnum1" type="text" required><span id="errorCnum1" >&nbsp &nbsp &nbsp *The field can take values only from 0-9 and length must be 10 digits</span><br></td>
+				</tr>
+				<tr>
+					<td>CONTACT NUMBER 2</td>
+					<td><input id="Cnum2" name="cnum2" type="text"><span id="errorCnum2" >&nbsp &nbsp &nbsp *The field can take values only from 0-9 and length must be 10 digits</span><br></td>
+				</tr>
+				<tr>
+					<td>EMAIL ID</td>
+					<td><input name="emailid" type="email" required></td>
+				</tr>
+				<tr>
+					<td><input value="Submit Form" type="submit"></td>
+					<td><input value="Clear Form" type="reset"></td>
+				</tr>
+			</table>
+		</form>
+	</body>

@@ -1,0 +1,108 @@
+<html>
+	<head>
+		<style>
+			body
+			{
+				background-color:black;
+				color:black;
+			}
+			.container
+			{
+				border: 50px solid white;
+				border-radius:25px;
+				width: 200px;
+				height:175px;
+			}
+		</style>
+		<script src="jquery-3.1.0.js"></script>
+		<!--JAVASCRIPT FOR THE TOGGLING IMAGES WHICH DISPLAY LOGIN-->
+		<script>
+		$(document).ready(function(){
+			$("#img1").click(function(){
+			$("#info1").toggle();
+			});
+		});
+		</script>
+		<script>
+		$(document).ready(function(){
+			$("#img2").click(function(){
+			$("#info2").toggle();
+			});
+		});
+		</script>
+	</head>
+	<body>
+		<!--HEADER WITH LOGO-->
+		<div style="top:0px" >
+			<img src="logo.png" height="150" width="200" style="float:left">
+			<img src="logo.png" height="150" width="200" style="float:right">
+			<div style="color:white;
+					text-align:center;
+					font-family:castellar; 
+					font-size:60px;
+					padding-top:40px;
+					text-shadow: 1px 1px 2px white, 0 0 2px white, 0 0 5px white;" >
+				<u>HOGWARTS LIBRARY</u>
+			</div>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<!--LIBRARIAN LOGIN-->
+		<div style="display:inline-block; background-color:white; color:black; float:left" class="container">
+			<span align="center" style="font-size:20px"><b>&nbsp &nbsp &nbsp &nbsp LIBRARIAN</b></span>
+			<br>
+			<br>
+			&nbsp &nbsp &nbsp &nbsp &nbsp <img id="img1" src="librarian1.jpg" height="100" width="100" style=" border-radius:25px">
+			<form id="info1" style="display:none; font-size:15px; color:black;" align="center" action="librarianlogin.php" method="post" enctype="multipart/form-data" onsubmit="return">
+			<table>
+				<tr>
+					<td>USERNAME</td>
+					<td><input type="text" name="lname" required></td>
+				</tr>
+				<tr>
+					<td>PASSWORD</td>
+					<td><input type="password" name="lpasswd" required></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td><input id="button" type="submit" value="LOGIN">
+				</tr>
+			</table>
+			</form>
+		</div>
+		<!--MEMBER LOGIN-->
+		<div style="display:inline-block; background-color:white; color:black; float:right" class="container">
+			<span align="center" style="font-size:20px"><b>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp USER</b></span>
+			<br>
+			<br>
+			&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp<img id="img2" src="user.jpg" height="100" width="100" style=" border-radius:25px">
+			<form id="info2" style="display:none; font-size:15px; color:black;" align="center"  action="memberlogin.php" method="post" enctype="multipart/form-data" onsubmit="return">
+			<table>
+				<tr>
+					<td>USERNAME</td>
+					<td><input type="text" name="mname" required></td>
+				</tr>
+				<tr>
+					<td>PASSWORD</td>
+					<td><input type="password" name="mpasswd" required></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td><input id="button" type="submit" value="LOGIN">
+				</tr>
+			</table>
+			</form>
+		</div>
+		&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp  &nbsp &nbsp &nbsp &nbsp 
+		<!--GUEST PAGE-->
+		<div style="display:inline-block; background-color:white; color:black;" class="container">
+			<span align="center" style="font-size:20px"><b>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp GUEST</b></span>
+			<br>
+			<br>
+			&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp <a href="gpage.html"><img src="guest.jpg" height="100" width="100" style=" border-radius:25px"></a>
+		</div>
+	</body>
+</html>

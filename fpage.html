@@ -1,0 +1,98 @@
+<html>
+	<head>
+		<style>
+		body
+			{
+				background-color:black;
+				color:white;
+			}
+		<!--SLIDESHOW STYLING-->
+		.fadein 
+			{ 
+				 position:relative; 
+				 width:1000px; 
+				 height:500px;  
+				  
+			}
+		.fadein img 
+			{ 
+				position:absolute;
+			    left:80px;
+				width:1200px; 
+				height:300px;
+				z-index:-1;
+			}
+		</style>
+		<script src="jquery-3.1.0.js"></script>
+		<!--SLIDESHOW JQUERY-->
+		<script>
+			$(function(){
+				$('.fadein img:gt(0)').hide(); //ALL IMAGES OTHER THAN THE FIRST IMAGE MUST BE HIDDEN
+				setInterval(function(){
+				$('.fadein :first-child').fadeOut()
+					.next('img').fadeIn()
+				.end().appendTo('.fadein');}, //TO APPEND TO THE END OF THE QUEUE
+				3000);
+			});
+		</script>
+	</head>
+	<body>
+	<!--HEADER WITH LOGO-->
+		<div style="top:0px" >
+			<img src="logo.png" height="150" width="200" style="float:left">
+			<img src="logo.png" height="150" width="200" style="float:right">
+			<div style="color:white;
+					text-align:center;
+					font-family:castellar; 
+					font-size:60px;
+					padding-top:40px;
+					text-shadow: 1px 1px 2px white, 0 0 2px white, 0 0 5px white;" >
+				<u>HOGWARTS LIBRARY</u>
+			</div>
+	<!--SLIDESHOW-->
+		<br>
+		<br>
+		<br>
+		<div class="fadein" >
+			<img src="lib8.jpg">
+			<img src="lib1.png">
+			<img src="lib2.jpg">
+			<img src="lib3.jpg">
+			<img src="lib4.jpg">
+			<img src="lib5.jpg">
+			<img src="lib6.jpg">
+			<img src="lib7.jpg">
+			<img src="lib9.jpg">
+			<img src="lib10.png">
+		</div>
+	<!--FOOTER-->
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<div style="BOTTOM:0px ;padding-left:80px" >
+			<img src="door1.png" height="100" width="200" style="float:left">
+			<div style="
+					padding-top:30px;
+					padding-left:400px">
+				<u><a href="page1.html" style="text-decoration:none;color:white;
+					font-family:castellar; 
+					font-size:30px;"><b>CLICK HERE TO PROCEED >></a></u>
+			</div>
+	</body>
+</html>
