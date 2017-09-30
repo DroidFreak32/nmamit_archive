@@ -1,3 +1,5 @@
+CREATE DATABASE ClassProj;
+use ClassProj;
 CREATE TABLE books (
     book_isbn INT NOT NULL,
     name varchar(128),
@@ -81,8 +83,6 @@ SELECT * FROM books;
 SELECT * FROM book_desc;
 SELECT * FROM book_quantity;
 
-
-DELETE FROM `books` WHERE `books`.`book_isbn` = 102
 
 
 -- ****** QUERIES ******
