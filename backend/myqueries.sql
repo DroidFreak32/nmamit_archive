@@ -84,3 +84,36 @@ SELECT * FROM book_quantity;
 
 DELETE FROM `books` WHERE `books`.`book_isbn` = 102
 
+
+-- ****** QUERIES ******
+
+
+-- To count the total no of books of every type in the library.
+SELECT COUNT(*) FROM books
+
+
+
+
+-- To count the total no of books of a particular Genre in the library.
+-- SELECT COUNT(*) FROM books WHERE genre='<Insert Genre here>'
+SELECT COUNT(*) FROM books WHERE genre='Fiction'
+
+
+
+
+-- To count the number of books available
+-- SELECT COUNT(*) FROM book_quantity WHERE book_isbn=<Insert ISBN here> AND avail=1
+SELECT COUNT(*) FROM book_quantity WHERE book_isbn=101 AND avail=1
+
+
+
+
+-- Given the bookname, get the description and the number of pages:
+-- SELECT `description`, `no_of_pages` FROM `book_desc`
+-- WHERE `book_isbn`=(
+--     SELECT book_isbn FROM books where books.name='<Insert book name here>'
+--     );
+SELECT `description`, `no_of_pages` FROM `book_desc`
+WHERE `book_isbn`=(
+    SELECT book_isbn FROM books where books.name='Harry Potter and the Philosopher\'s Stone'
+    );
