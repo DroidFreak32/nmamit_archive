@@ -67,11 +67,11 @@
 	//see if wrks without connection 
 	
 	//connection 
-	$con=mysql_connect("localhost","root","");
+	$con=mysqli_connect("localhost","root","");
 	if($con)
 	{
 		//database selection
-		$temp=mysql_select_db("library",$con);
+		$temp=mysqli_select_db($con,"library");
 		if($temp)
 		{
 			//GENERATES RANDDOM MEMBERSHIP NUMBER(10 DIGIT LONG)
@@ -79,14 +79,14 @@
 				$randomNumber .= mt_rand(0, 9);
 			$m_id="LIB".$randomNumber;
 			$sql="select * from temp_member";
-			$result=mysql_query($sql);
-			while($row=mysql_fetch_array($result))//To check if the id is already previously assigned to a member or not
+			$result=mysqli_query($con,$sql);
+			while($row=mysqli_fetch_array($result))//To check if the id is already previously assigned to a member or not
 				if($row['Membership_No']==$m_id)
 					goto a;
 			//query to insert into temp table the form details
 			$sql="Insert into temp_member values('$m_id','".$_POST['mfname']."','".$_POST['mmname']."','".$_POST['mlname']."','";
 			$sql=$sql.$_POST['sex']."','".$_POST['aadhar_no']."','".$_POST['bdate']."','".$_POST['addl1']."','".$_POST['addl2']."','".$_POST['city']."','".$_POST['pincode']."','".$_POST['state']."','".$_POST['country']."','".$_POST['cnum1']."','".$_POST['cnum2']."','".$_POST['emailid']."')";
-			$result=mysql_query($sql);
+			$result=mysqli_query($con,$sql);
 		}
 		else 
 			echo '<br>Database selection Unsuccessful';

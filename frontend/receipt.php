@@ -36,17 +36,17 @@ echo'
 		<br>
 		<br>';*/
 	//connection 
-	$con=mysql_connect("localhost","root","");
+	$con=mysqli_connect("localhost","root","");
 	if($con)
 	{
 		//database selection
-		$temp=mysql_select_db("library",$con);
+		$temp=mysqli_select_db($con,"library");
 		if($temp)
 		{
 			$mno='LIB9785183851';
 			$sql='Select * from temp_member';
-			$result=mysql_query($sql);
-			while($row=mysql_fetch_array($result))
+			$result=mysqli_query($con,$sql);
+			while($row=mysqli_fetch_array($result))
 			{
 				if($row['Membership_no']==$mno)
 					break;

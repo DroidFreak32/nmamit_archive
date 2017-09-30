@@ -30,22 +30,22 @@ echo    '<body>
 	$mname=$_POST['mname'];
 	$mpasswd=$_POST['mpasswd'];
 	//connection 
-	$con=mysql_connect("localhost","root","");
+	$con=mysqli_connect("localhost","root","");
 	if($con)
 	{
 		//database selection
-		$temp=mysql_select_db("library",$con);
+		$temp=mysqli_select_db($con,"library");
 		if($temp)
 		{
 			//query to check login details
 			$sql='select * from member_login';
-			$result=mysql_query($sql);
-			while($row=mysql_fetch_array($result))
+			$result=mysqli_query($con,$sql);
+			while($row=mysqli_fetch_array($result))
 			if($row["Membership_No"]==$mname&&$row["Password"]==sha1($mpasswd))
 			{
 				$sql="Select Fname,Mname,Lname from member m,member_login ml where m.Membership_no='".$mname."'";
-				$result=mysql_query($sql);
-				$row=mysql_fetch_array($result);
+				$result=mysqli_query($con,$sql);
+				$row=mysqli_fetch_array($result);
 				echo '<br><br><br><br><br><br>
 			<p align="center"><b>LOGIN SUCCESSFUL<br>WELCOME MISS '.$row['Fname'].' '.$row['Mname'].' '.$row['Lname'].'
 			<br><br><br><br><br><br><br><br><br><br>

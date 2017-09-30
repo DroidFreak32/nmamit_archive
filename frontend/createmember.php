@@ -37,28 +37,28 @@ echo '
 		<br>';
 	
 	//connection 
-	$con=mysql_connect("localhost","root","");
+	$con=mysqli_connect("localhost","root","");
 	if($con)
 	{
 		//database selection
-		$temp=mysql_select_db("library",$con);
+		$temp=mysqli_select_db($con,"library");
 		if($temp)
 		{
 			$date=date('y-m-d');
 			$sql='Select * from temp_member';
-			$result=mysql_query($sql);
-			while($row=mysql_fetch_array($result))
+			$result=mysqli_query($con,$sql);
+			while($row=mysqli_fetch_array($result))
 			{
 				if(strcmp($row['Membership_no'],$_POST['mno'])==0)
 					break;
 			}
 			$sql="Insert into Member values('".$row['Membership_no']."','".$row['Fname']."','".$row['Mname']."','".$row['Lname']."','";
 			$sql=$sql.$row['Sex']."','".$row['Aadhar_no']."','".$row['Birth_Date']."','".$row['Address_line1']."','".$row['Address_line2']."','".$row['City']."','".$row['Pincode']."','".$row['State']."','".$row['Country']."','".$row['ContactNo1']."','".$row['ContactNo2']."','".$row['EmailId']."','$date')";
-			$result=mysql_query($sql);
+			$result=mysqli_query($con,$sql);
 			$sql="Delete from temp_member where Membership_no='".$_POST['mno']."'";
-			$result=mysql_query($sql);
+			$result=mysqli_query($con,$sql);
 			$sql="Insert into member_login values('".$_POST['mno']."','".sha1($_POST['mno'])."')";
-			$result=mysql_query($sql);
+			$result=mysqli_query($con,$sql);
 			echo'
 				<div id="receipt">
 				<br>

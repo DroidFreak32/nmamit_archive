@@ -36,11 +36,11 @@ echo '
 		<br>
 		<br>';
 	//connection 
-	$con=mysql_connect("localhost","root","");
+	$con=mysqli_connect("localhost","root","");
 	if($con)
 	{
 		//database selection
-		$temp=mysql_select_db("library",$con);
+		$temp=mysqli_select_db($con,"library");
 		if($temp)
 		{
 			$date=date('y-m-d');
@@ -50,7 +50,7 @@ echo '
 			$sql=$sql.$_POST['sex']."','".$_POST['cnum']."','".$_POST['emailid']."','".$_POST['exp']."','".$_POST['staff']."','".$_POST['cleanliness']."','".$_POST['ventilation'];
 			$sql=$sql."','".$_POST['effeciency']."','".$_POST['facility']."','".$_POST['qty']."','".$_POST['suff']."','".$_POST['updateness']."','".$_POST['condn']."','".$_POST['variety'];
 			$sql=$sql."','".$_POST['overallrate']."','".$_POST['src']."','".$_POST['recc']."','".$_POST['suggestion']."','$date')";
-			$result=mysql_query($sql);
+			$result=mysqli_query($con,$sql);
 		}
 		else 
 			echo '<br>Database selection Unsuccessful';

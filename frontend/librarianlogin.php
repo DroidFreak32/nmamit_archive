@@ -30,17 +30,17 @@ echo    '<body>
 	$lname=$_POST['lname'];
 	$lpasswd=$_POST['lpasswd'];
 	//connection 
-	$con=mysql_connect("localhost","root","");
+	$con=mysqli_connect("localhost","root","");
 	if($con)
 	{
 		//database selection
-		$temp=mysql_select_db("library",$con);
+		$temp=mysqli_select_db($con,"library");
 		if($temp)
 		{
 			//query to check login details
 			$sql='select * from librarian';
-			$result=mysql_query($sql);
-			$row=mysql_fetch_array($result);
+			$result=mysqli_query($con,$sql);
+			$row=mysqli_fetch_array($result);
 			if($row["username"]==$lname&&$row["password"]==sha1($lpasswd))
 				echo '<br><br><br><br><br><br>
 			<p align="center"><b>LOGIN SUCCESSFUL<br>WELCOME MISS '.$lname.'
