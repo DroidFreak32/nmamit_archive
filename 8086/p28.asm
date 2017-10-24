@@ -1,3 +1,4 @@
+; Multiply and display
 PA EQU 40B0H 
 PB EQU PA+1 
 PC EQU PB+1 
