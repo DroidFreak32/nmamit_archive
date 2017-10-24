@@ -39,25 +39,25 @@ SSDISPLAY PROC NEAR
     PUSH CX
     MOV CX,4
     MOV DI,SI
-    UP2:
+UP2:
     MOV BL,8
     MOV AL,[DI]
-    UP1:
-        ROL AL,1
-        MOV DX,PB
-        OUT DX,AL
-        PUSH AX
-        MOV AL,1
-        MOV DX,PC
-        OUT DX,AL
-        MOV AL,0
-        MOV DX,PC
-        OUT DX,AL
-        POP AX
-        DEC BL
-        JNZ UP1
-        INC DI
-        LOOP UP2
+UP1:
+    ROL AL,1
+    MOV DX,PB
+    OUT DX,AL
+    PUSH AX
+    MOV AL,1
+    MOV DX,PC
+    OUT DX,AL
+    MOV AL,0
+    MOV DX,PC
+    OUT DX,AL
+    POP AX
+    DEC BL
+    JNZ UP1
+    INC DI
+    LOOP UP2
     POP CX
     RET
 SSDISPLAY ENDP
@@ -65,8 +65,10 @@ DELAY PROC NEAR
     PUSH CX
     PUSH BX
     MOV CX,0fFFfH
-    L1: MOV BX,0FFFH
-    L2: DEC BX
+L1:
+    MOV BX,0FFFH
+L2:
+    DEC BX
     JNZ L2
     LOOP L1
     POP BX

@@ -29,16 +29,16 @@ START:
     MOV AH,09H
     INT 21H
     LEA SI, str
-    CALL READSTRING
+    CALL READSTRING                 ; Reads and displays the string one char at a time and increments "count" in CL
     MOV n,CL
     CLRSCR
     MOV AH, 02H
-    SETCURSOR 10,30
+    SETCURSOR 10,30                 ; middle
     LEA DX,msg2
     MOV AH,09H
     INT 21H
     LEA SI, str
-    MOV CL, n
+    ; MOV CL, n
     CALL DISPSTRING
     MOV AH,01H
     INT 21H
@@ -47,14 +47,14 @@ START:
 READSTRING PROC NEAR
     MOV CL, 00H
 UP:
-    CMP CL,30
+    CMP CL,30                       ; Max 30 chars
     JZ L1
-    MOV AH,01H
+    MOV AH,01H                      ; Reads and stores char in AL
     INT 21H
-    CMP AL,0DH
+    CMP AL,0DH                      ; If enter is pressed, exit
     JZ L1
-    MOV [SI],AL
-    INC SI
+    MOV [SI],AL                     ; Copy 1 Char at a time to SI 
+    INC SI                          ; Point to 2nd index
     INC CL
     JMP UP
 L1:
@@ -65,7 +65,7 @@ UP1:
 CMP CL,00H
 JZ L2
 MOV DL,[SI]
-MOV AH,02H
+MOV AH,02H                          ; Displays char stored in DL silently
 INT 21H
 INC SI
 DEC CL

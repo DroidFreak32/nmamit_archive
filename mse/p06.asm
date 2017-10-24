@@ -20,14 +20,14 @@ START:
     mov ah,09h
     int 21h
     LEA si,STR1                     ; Point SI to 0th index of STR1
-    CALL READSTR                    ; This func will store the string and it's length in DS
+    CALL READSTR                    ; This func will store the string and it's length in CL
     mov LEN1,Cl                     ; Store the length in LEN1
     lea dx,mg2
     mov ah,09h
     int 21h
     MOV CL,00                       ; Now CL is used to store STR2's length
     LEA si,STR2                     ; Point SI to 0th index of STR2
-    CALL READSTR                    ; This func will store the string and it's length in DS
+    CALL READSTR                    ; This func will store the string and it's length in CL
     mov LEN2,Cl                     ; Store the length in LEN2
     CMP CL,LEN1
     JNZ NOTEQ                       ; If lengths dont match, they are not Equal.
@@ -50,12 +50,12 @@ NOTEQ:
     LEA DX,mg4
     MOV AH,09h
     INT 21h
-    JMP DISP                        ; To prevent EQUAL's message to be displayed
+    JMP DISPLEN                        ; To prevent EQUAL's message to be displayed
 EQUAL:
     LEA DX,mg3
     MOV AH,09h
     INT 21h
-DISP:
+DISPLEN:
     LEA DX,mg5
     MOV AH,09h
     INT 21h

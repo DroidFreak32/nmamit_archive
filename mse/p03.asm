@@ -11,27 +11,27 @@ ASSUME CS:CODE,DS:DATA
 START:
 	MOV AX,DATA
 	MOV DS,AX
-	MOV CL,00H
-	MOV DL,LEN
-	DEC DL
+	MOV CL,00H 						; I=0
+	MOV DL,LEN 						; first loop i=0 to n-1
+	DEC DL 							; DL=n-1
 LOOP1:
-	CMP CL,DL
+	CMP CL,DL 						; if i < n-1
 	JZ DISPLAY
-	MOV BX,0000H
-	MOV DH,DL
-	SUB DH,CL
+	MOV DH,DL 						; For loop 2 where j < n-i-1
+	SUB DH,CL 						; dh = n-i-1
+	MOV BX,0000H 					; j=0
 LOOP2:
-	CMP BL,DH
+	CMP BL,DH 						; if j < n-i-1 , check if not sorted.
 	JB IFCN
-	INC CL
+	INC CL 							; Else i++ and loop again.
 	JMP LOOP1
 IFCN:
-	MOV AL,A[BX]
-	MOV AH,A[BX+1]
-	CMP AL,AH
+	MOV AL,A[BX] 					; AL = a[j]
+	MOV AH,A[BX+1] 					; AH = a[j+1]
+	CMP AL,AH 						; If a[j]<a[j+1] , already sorted so skip to next ele.
 	JBE NOSWP
-	MOV A[BX],AH
-	MOV A[BX+1],AL
+	MOV A[BX],AH 					; SWAP
+	MOV A[BX+1],AL 					
 NOSWP:
 	INC BX
 	JMP LOOP2

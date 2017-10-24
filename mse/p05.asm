@@ -17,7 +17,7 @@ START:
 	int 21h
 	LEA si,STR1						; Point SI to 0th index of STR1
 	LEA di,STR2						; Point DI to 0th index of STR2
-	CALL READSTR					; This func will store the string and it's length in DS
+	CALL READSTR					; This func will store the string and it's length in CL
 	mov len,Cl 						; Store the length in len
 	dec SI 							; SI is out of bounds, so bring it back
 	MOV CL,00 						; Now CL is used to store STR2's length

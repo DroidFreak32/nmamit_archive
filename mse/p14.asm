@@ -7,59 +7,64 @@ cw equ 82h
 
 code segment
 assume cs:code
-start: mov al,cw
-       mov dx,pcw
-       out dx,al
+start:
+	mov al,cw
+	mov dx,pcw
+	out dx,al
 
-       mov al,00h
-       mov dx,pa
-    up:cmp al,15h
-       jz down
-       out dx,al
-       call delay
+	mov al,00h
+	mov dx,pa
+up:
+	cmp al,15h
+	jz down
+	out dx,al
+	call delay
 
-       push ax
-       mov ah,01h
-       int 16h
-       jnz exit
-       pop ax
+	push ax 				; Wait for keypress
+	mov ah,01h
+	int 16h
+	jnz exit
+	pop ax
 
-       add al,01h
-       daa
-       jmp up
+	add al,01h
+	daa
+	jmp up
+down:
+	cmp al,00h
+	je exit
+	out dx,al
+	call delay
 
-  down:cmp al,00h
-       je exit
-       out dx,al
-       call delay
+	push ax
+	mov ah,01h
+	int 16h
+	jnz exit
+	pop ax
 
-       push ax
-       mov ah,01h
-       int 16h
-       jnz exit
-       pop ax
+	sub al,01
+	das
+	jmp down
+exit:
+	mov al,00h
+	out dx,al
+	mov ah,4ch
+	int 21h
 
-       sub al,01
-       das
-       jmp down
-  exit:mov al,00h
-       out dx,al
-       mov ah,4ch
-       int 21h
-
-       delay proc near
-       push bx
-       push cx
-       mov cx,0ffaah
-    l1:mov bx,0ffaah
-    l2:dec bx
-       jnz l2
-       loop l1
-       pop cx
-       pop bx
-       ret
-   delay endp
-  code ends
+delay proc near
+	push bx
+	push cx
+	mov cx,0ffaah
+l1:
+	mov bx,0ffaah
+l2:
+	dec bx
+	jnz l2
+	loop l1
+	pop cx
+	pop bx
+	ret
+delay endp
+code ends
 end start
 
 

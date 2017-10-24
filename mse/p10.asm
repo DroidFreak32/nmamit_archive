@@ -23,7 +23,7 @@ START:
     MOV HSEC,DL
 
     MOV AL,HR
-    AAM
+    AAM                                 ; If hour is 15, AL = 0Fh. AAM makes AL=01 and AH=05
     MOV BX,AX
     CALL DISPUNPACKEDBCD
     MOV DL,':'
@@ -55,12 +55,12 @@ START:
     INT 21H
 
 DISPUNPACKEDBCD PROC NEAR
-    MOV DL,BH
-    ADD DL,30H
+    MOV DL,BH                           ; First display 1
+    ADD DL,30H                          ; To get equiv ASCII of 1
     MOV AH,02H
     INT 21H
 
-    MOV DL,BL
+    MOV DL,BL                           ; Then display 5
     ADD DL,30H
     MOV AH,02H
     INT 21H
