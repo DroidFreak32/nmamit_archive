@@ -3,9 +3,10 @@
 	#include<stdio.h>
 	int id=0;
 %}
-IDENTIFIER ^[_a-zA-Z][_a-zA-z0-9]*$
 %%
-{IDENTIFIER} {id++;printf("ID: ");ECHO;printf("\n");}
+	/* Regex for identifuer */
+[_a-zA-Z][_a-zA-z0-9]* {id++;printf("ID: ");ECHO;printf("\n");}
+	/* Skip all the rest */
 .+ {;}
 %%
 int yywrap() { return 1; }

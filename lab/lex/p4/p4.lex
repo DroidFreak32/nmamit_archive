@@ -3,8 +3,9 @@
 	#include<stdio.h>
 	int id=0;
 %}
+IDENTIFIER ^[_a-zA-Z][_a-zA-z0-9]*$
 %%
-[_a-zA-Z][_a-zA-z0-9]* {id++;printf("ID: ");ECHO;printf("\n");}
+{IDENTIFIER} {id++;printf("ID: ");ECHO;printf("\n");}
 .+ {;}
 %%
 int yywrap() { return 1; }
@@ -15,5 +16,5 @@ main(int argc, char *argv[]){
 	}
 	yyin=fopen(argv[1],"r");
 	yylex();
-	printf("\nIdentifiers %d",id);
+	printf("\nIdentifiers %d\n",id);
 }

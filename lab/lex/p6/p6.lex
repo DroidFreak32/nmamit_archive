@@ -3,6 +3,7 @@
     int s=0,p=0;
 %}
 %%
+    /* fprintf() replaces matched regex ?*/
 "printf" {p++; fprintf(yyout,"writef");}
 "scanf" {s++; fprintf(yyout,"readf");}
 %%

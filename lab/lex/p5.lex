@@ -3,6 +3,7 @@
 	int is_simple=1;
 %}
 %%
+	/* Space/tab/newline followed by BUT/AND/OR followed by Space/tab/newline */
 [ \t\n][bB][uU][Tt][ \t\n] {is_simple=0;}
 [ \t\n][oO][rR][ \t\n] {is_simple=0;}
 [ \t\n][aA][nN][dD][ \t\n] {is_simple=0;}

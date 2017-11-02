@@ -3,9 +3,9 @@
 	int vow=0,cons=0;
 %}
 %%
-[aeiouAEIOU] {vow++; }
-[a-zA-Z] {cons++; }
-. {;}
+[aeiouAEIOU] {vow++; } 										// 1st check for vow
+[a-zA-Z] {cons++; }											// Elce cons ++
+. {;}														// Other unwanted chars
 %%
 int yywrap(){
 	return 1;
