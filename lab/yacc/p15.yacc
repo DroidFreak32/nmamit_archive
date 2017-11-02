@@ -13,9 +13,9 @@ if_stmt:    IF'('cond')''{'if_stmt'}'{count++;}
             |S;
 cond: x RELOP x
     ;
-x:ID
-  |NUMBER
-  ;
+x:  ID
+    |NUMBER
+    ;
 %%
 int yyerror(char *msg)
 {

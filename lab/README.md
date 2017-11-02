@@ -36,3 +36,33 @@ Contains only LAB exam programs.
 [08](https://github.com/DroidFreak32/CompilerDesignLab/blob/master/lab/lex/p8.lex) OR [08.1](https://github.com/DroidFreak32/CompilerDesignLab/blob/master/lab/lex/p8_2.lex)
 	
 	Compute the factorial of a positive integer ‘n’ using recursive procedure.
+
+## PART B
+
+[09-yacc](https://github.com/DroidFreak32/CompilerDesignLab/blob/master/lab/yacc/p09.yacc) [09-lex](https://github.com/DroidFreak32/CompilerDesignLab/blob/master/lab/yacc/p09.lex)
+	
+	Recognize a^nb^n n>=1
+
+[10-yacc](https://github.com/DroidFreak32/CompilerDesignLab/blob/master/lab/yacc/p10.yacc) [10-lex](https://github.com/DroidFreak32/CompilerDesignLab/blob/master/lab/yacc/p10.lex)
+	
+	Recognize a^nb n>=10
+
+[11-yacc](https://github.com/DroidFreak32/CompilerDesignLab/blob/master/lab/yacc/p11.yacc) [11-lex](https://github.com/DroidFreak32/CompilerDesignLab/blob/master/lab/yacc/p11.lex)
+	
+	Recognize a valid arithmetic expression
+
+[12-yacc](https://github.com/DroidFreak32/CompilerDesignLab/blob/master/lab/yacc/p12.yacc) [12-lex](https://github.com/DroidFreak32/CompilerDesignLab/blob/master/lab/yacc/p12.lex)
+	
+	Evaluate a valid arithmetic expression
+
+[13-yacc](https://github.com/DroidFreak32/CompilerDesignLab/blob/master/lab/yacc/p13.yacc) [13-lex](https://github.com/DroidFreak32/CompilerDesignLab/blob/master/lab/yacc/p13.lex)
+	
+	Recognize a valid identifier
+
+[14-yacc](https://github.com/DroidFreak32/CompilerDesignLab/blob/master/lab/yacc/p14.yacc) [14-lex](https://github.com/DroidFreak32/CompilerDesignLab/blob/master/lab/yacc/p14.lex)
+	
+	Recognize a valid declaration statement
+
+[15-yacc](https://github.com/DroidFreak32/CompilerDesignLab/blob/master/lab/yacc/p15.yacc) [15-lex](https://github.com/DroidFreak32/CompilerDesignLab/blob/master/lab/yacc/p15.lex)
+	
+	Calculate NO. of nested if statements
