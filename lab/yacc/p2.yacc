@@ -1,7 +1,7 @@
 %{
-	#include<stdio.h>
-	#include<stdlib.h>
-	int c=0;
+    #include<stdio.h>
+    #include<stdlib.h>
+    int c=0;
 %}
 
 %token ID NUM NL IF S ROP
@@ -14,11 +14,11 @@ cond:ID ROP ID|ID ROP NUM|NUM ROP ID|NUM ROP NUM;
 
 void yyerror()
 {
-	printf("Valid if statement\nLevels of nesting:%d\n",c);
+    printf("Valid if statement\nLevels of nesting:%d\n",c);
 }
 
 int main()
 {
-	yyparse();
-	return 0;
+    yyparse();
+    return 0;
 }
