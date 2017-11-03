@@ -39,7 +39,7 @@ int main(){
     char str[25];
     int j;
     FILE *f1;
-    printf("Enter the path of the file relative to current directory: ");
+    printf("Enter file path (drive:\\fold\\filename)\n");
     scanf("%s",fname);
     f1 = fopen(fname,"r");
     if(f1==NULL){
