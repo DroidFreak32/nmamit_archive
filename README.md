@@ -102,3 +102,11 @@ Contains only LAB exam programs.
 [10](https://github.com/DroidFreak32/mp_lab/blob/mse2/mse/p22.asm)
 	
 	Drive a stepper motor interface to rotate the motor by N steps left direction and N steps right direction (N is specified by the examiner). Introduce suitable delay between successive steps.
+
+[11](https://github.com/DroidFreak32/mp_lab/blob/mse2/mse/p23.asm)
+	
+	Scan an 8 x 3 keypad for key closure and to store the code of the key pressed in a memory location or display on screen. Also display row and column numbers of the key pressed.
+
+[12](https://github.com/DroidFreak32/mp_lab/blob/mse2/mse/p24.asm)
+	
+	Scan an 8 x 3 keypad for key closure and simulate ADD and SUBTRACT operations as in a calculator.

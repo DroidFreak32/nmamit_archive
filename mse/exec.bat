@@ -1,3 +1,3 @@
-masm p12.asm;
-link p12.obj;
-p12.exe
+masm p23.asm;
+link p23.obj;
+rem p23.exe
