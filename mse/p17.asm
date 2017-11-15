@@ -39,27 +39,27 @@ UP:
 
 SSDISPLAY PROC NEAR 
     PUSH CX 
-    MOV CX,04 
+    MOV CX,04                   ; tot num of slots in 7 seg
     MOV DI, SI 
 
 UP2:
     MOV AL, [DI] 
-    MOV BL, 08 
+    MOV BL, 08                  ; 8 Bits of 1 character to be sent to 7 segment
 UP1:
     ROL AL, 01H 
     MOV DX, PB 
-    OUT DX, AL 
+    OUT DX, AL                  ; Send the MSB
     PUSH AX 
-    MOV AL, 01H 
     MOV DX, PC 
+    MOV AL, 01H                 ; -ve trigger
     OUT DX, AL 
-    MOV AL, 00H 
-    OUT DX, AL 
+    MOV AL, 00H
+    OUT DX, AL                  ; -ve trigger end
     POP AX 
-    DEC BL 
-    JNZ UP1 
-    INC DI 
-    LOOP UP2 
+    DEC BL
+    JNZ UP1                     ; Repeat for 8 bits 
+    INC DI                      ; Point to 2nd char
+    LOOP UP2                    ; Repeat for next slot
     POP CX 
     RET 
 SSDISPLAY ENDP 

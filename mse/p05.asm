@@ -32,7 +32,7 @@ UP1:
 	DEC SI
 	JMP UP1
 CHECKPAL:
-	LEA SI,STR1
+	LEA SI,STR1 					; Reset position of str1 and 2
 	LEA DI,STR2
 	MOV CL,00
 ; Loop to compare each char of STR1 and STR2

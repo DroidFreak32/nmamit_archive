@@ -5,7 +5,7 @@ PC equ pb+1
 PCW equ pc+1
 CW equ 80h
 DATA segment
-    SSMSG db 0ffh,0ffh,0ffh,0ffh,0c1h,0c0h,0c1h,8ch,0f9h,0ffh,0ffh,0ffh
+    SSMSG db 0ffh,0ffh,0ffh,0ffh,0c1h,0c0h,0c1h,8ch,0f9h,0ffh,0ffh,0ffh ; _ _ _ _ U D U P I _ _ _
 DATA ends
 CODE SEGMENT
 ASSUME CS:CODE,DS:DATA
@@ -29,9 +29,9 @@ UP:
     INC SI
     DEC cx
     JNZ UP
-    MOV ah,01h
+    MOV ah,01h                      ; exit if key is pressed
     INT 16h
-    JZ go
+    JZ GO                           ; NO keypress, 0 flag 
 EXIT:
     MOV AH,4CH
     INT 21H

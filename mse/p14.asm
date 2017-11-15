@@ -23,7 +23,7 @@ up:
 	push ax 				; Wait for keypress
 	mov ah,01h
 	int 16h
-	jnz exit
+	jnz exit  				; Exit if key is not pressed
 	pop ax
 
 	add al,01h
