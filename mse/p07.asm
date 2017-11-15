@@ -6,8 +6,8 @@ INT 10H
 ENDM
 
 SETCURSOR MACRO row, col
+MOV DH, row 
 MOV DL, col
-MOV DH, row
 MOV BH, 00H
 MOV AH, 02H
 INT 10H

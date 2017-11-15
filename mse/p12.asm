@@ -69,7 +69,7 @@ READBCD PROC NEAR                           ; Procedure to input 1st char, immed
     RET
 READBCD ENDP                                ; Proper "15" stored in BL (00010101) 
 
-BCD_TO_BIN PROC NEAR                        ; Converts "15" to 0FH
+BCD_TO_BIN PROC NEAR                        ; Converts "15" (decimal) to 0FH (Hex)
     MOV DH,BL
     AND DH,0FH
     MOV AL, BL

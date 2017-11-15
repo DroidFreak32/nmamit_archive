@@ -23,10 +23,10 @@ up:
 	push ax 				; Wait for keypress
 	mov ah,01h
 	int 16h
-	jnz exit  				; Exit if key is not pressed
+	jnz exit  				; Exit if key is pressed (if keypress, zero flag is unset)
 	pop ax
 
-	add al,01h
+	add al,01h 				; Daa will automatically change 0A to 10
 	daa
 	jmp up
 down:

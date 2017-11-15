@@ -1,77 +1,53 @@
-; Display name
-CLRSCR MACRO
-MOV AH, 00H
-MOV AL, 02H
-INT 10H
+; Write ALP macros: 
+; a) To read a character from the keyboard in the module (1) (different file).
+; b) To display a character in module (2) (different file).
+; c) Use the above two modules to read a string of characters from the keyboard terminated by the carriage return and print the string on the display in the next line.
+READ MACRO
+MOV AH,01H
+INT 21H
 ENDM
-
-SETCURSOR MACRO row, col
-MOV DL, col
-MOV DH, row
-MOV BH, 00H
-MOV AH, 02H
-INT 10H
+WRITE MACRO
+MOV DL,AL
+MOV AH,02H
+INT 21H
 ENDM
-
 DATA SEGMENT
-msg1 DB 'ENTER YOUR NAME:$'
-msg2 DB 'What is your name?$'
-str DB 30 dup(?)
-n DB ?
+MSG DB 10,13,'ENTER A STRING',10,13,'$'
+MSG2 DB 10,13,'ENTERED STRING IS:',10,13,'$'
+STR DB 50 DUP(?)
 DATA ENDS
-
 CODE SEGMENT
 ASSUME CS:CODE,DS:DATA
-START:
+START: 
     MOV AX,DATA
     MOV DS,AX
-    LEA DX,msg1
+    MOV CL,0
+    LEA SI,STR
+    LEA DX,MSG
     MOV AH,09H
     INT 21H
-    LEA SI, str
-    CALL READSTRING                 ; Reads and displays the string one char at a time and increments "count" in CL
-    MOV n,CL
-    CLRSCR
-    MOV AH, 02H
-    SETCURSOR 10,30                 ; middle
-    LEA DX,msg2
+UP:
+    READ
+    MOV [SI],AL
+    INC SI
+    CMP AL,0DH
+    JE DOWN
+    INC CL
+    CMP CL,50
+    JNE UP
+DOWN: 
+    LEA SI,STR
+    LEA DX,MSG2
     MOV AH,09H
     INT 21H
-    LEA SI, str
-    ; MOV CL, n
-    CALL DISPSTRING
-    MOV AH,01H
-    INT 21H
+UP1:
+    MOV AL,[SI]
+    WRITE
+    DEC CL
+    INC SI
+    CMP CL,0
+    JNZ UP1
     MOV AH,4CH
     INT 21H
-READSTRING PROC NEAR
-    MOV CL, 00H
-UP:
-    CMP CL,30                       ; Max 30 chars
-    JZ L1
-    MOV AH,01H                      ; Reads and stores char in AL
-    INT 21H
-    CMP AL,0DH                      ; If enter is pressed, exit
-    JZ L1
-    MOV [SI],AL                     ; Copy 1 Char at a time to SI 
-    INC SI                          ; Point to 2nd index
-    INC CL
-    JMP UP
-L1:
-    RET
-READSTRING ENDP
-DISPSTRING PROC NEAR
-UP1:
-CMP CL,00H
-JZ L2
-MOV DL,[SI]
-MOV AH,02H                          ; Displays char stored in DL silently
-INT 21H
-INC SI
-DEC CL
-JMP UP1
-L2:
-RET
-DISPSTRING ENDP
 CODE ENDS
 END START

@@ -1,5 +1,6 @@
 ;Program to implement odd/even parity and count no of 1's
-
+; LED ON 1
+; LED OFF 0
 pa equ 40a0h
 pb equ pa+1
 pc equ pb+1
@@ -9,7 +10,7 @@ cw equ 82h
 code segment
 assume cs:code
 start:
-    mov dx,cwr              ;Initializing control word
+    mov dx,pcw             ;Initializing control word
     mov al,cw               ; of 8255
     out dx,al
 
@@ -17,7 +18,7 @@ start:
     in al,dx
 
     mov bl,al
-    mov cl,00h              ; Count of NO. of 1s
+    mov cl,00h              ; Count of NO. of 1s (ON LED)
     mov ch,08h              ; For 8 bits
 
 l1:     
@@ -33,7 +34,7 @@ down:
 ; CHECK FOR O/E PARITY
     mov ch,cl               ; Store NO of 1s in CH (We'll need CL later display the NO of 1s)
 
-    shr ch,01h              ; In BINARY, If it ends with 0, it's ODD else it's EVEN
+    shr ch,01h              ; In BINARY, If it ends with 0, it's EVEN else it's ODD
     jnc evenp
 ; Odd parity if Carry is generated
     mov al,00h              ; If odd, show 00

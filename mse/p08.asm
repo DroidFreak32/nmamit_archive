@@ -1,6 +1,6 @@
 ; Factorial
 data segment 
-n db 05h 
+n db 06h 
 fact dw ?
 msg db 'factorial(6)=$' 
 data ends 
