@@ -35,7 +35,7 @@ Contains only LAB exam programs.
 
 [08](https://github.com/DroidFreak32/CompilerDesignLab/blob/master/lab/lex/p8.lex) OR [08.1](https://github.com/DroidFreak32/CompilerDesignLab/blob/master/lab/lex/p8_2.lex)
 	
-	Compute the factorial of a positive integer ‘n’ using recursive procedure.
+	Check if the given expression is valid. Print the operands and operators
 
 ## PART B
 
