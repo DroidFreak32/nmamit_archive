@@ -49,15 +49,15 @@ Contains only LAB exam programs.
 
 [11-yacc](https://github.com/DroidFreak32/CompilerDesignLab/blob/master/lab/yacc/p11.yacc) [11-lex](https://github.com/DroidFreak32/CompilerDesignLab/blob/master/lab/yacc/p11.lex)
 	
-	Recognize a valid arithmetic expression
+	Recognize a valid identifier
 
 [12-yacc](https://github.com/DroidFreak32/CompilerDesignLab/blob/master/lab/yacc/p12.yacc) [12-lex](https://github.com/DroidFreak32/CompilerDesignLab/blob/master/lab/yacc/p12.lex)
 	
-	Evaluate a valid arithmetic expression
+	Recognize a valid arithmetic expression
 
 [13-yacc](https://github.com/DroidFreak32/CompilerDesignLab/blob/master/lab/yacc/p13.yacc) [13-lex](https://github.com/DroidFreak32/CompilerDesignLab/blob/master/lab/yacc/p13.lex)
 	
-	Recognize a valid identifier
+	Evaluate a valid arithmetic expression
 
 [14-yacc](https://github.com/DroidFreak32/CompilerDesignLab/blob/master/lab/yacc/p14.yacc) [14-lex](https://github.com/DroidFreak32/CompilerDesignLab/blob/master/lab/yacc/p14.lex)
 	
