@@ -15,30 +15,32 @@ RSA ALGORITHM
 #include <string.h>
 #include <math.h>
 
+typedef unsigned long int ulint; // To avoid typing "unsigned long int" all the time.
+
 using namespace std;
 
-long int e,n,cipher[50];
+ulint e,n,cipher[50];
 int len;
 
-int gcd(long int a,long int b){
+ulint gcd(ulint a,ulint b){
     if(a==0) return b;
     if(b==0) return a;
     return gcd(b ,a%b);
 }
 
-int prime(int a){
+bool prime(ulint a){
     int i;
-    for(i=2; i<a; i++)
-        if((a%i)==0)
-            return 0;
-    return 1;
+    for(i = 2; i < a; i++)
+        if((a%i) == 0)
+            return false;
+    return true;
 }
 
 
 class bob // The server
 {
 private:
-    long int phi,d,p,q; // Shh...
+    ulint phi,d,p,q; // Shh...
     char msg[50];
 public:
 
@@ -56,12 +58,12 @@ public:
 
         //n & Φ formula
         n=p*q;
-        phi=(p-1)*(q-1);
+        phi = (p-1)*(q-1);
 
         // e
         do {
             e = rand()%phi;
-        } while( gcd(e,phi)!=1 );
+        } while( gcd(e,phi) != 1 );
 
         // d
         do {
@@ -72,16 +74,16 @@ public:
     void dispMsg(){
         int i;
         //Decrypt the cipher msg
-        for(i=0; i<len; i++){
+        for(i = 0; i < len; i++){
             msg[i]=decrypt(cipher[i]);
         }
         msg[i]='\0'; // Array termination
         cout<<"\nDecrypted message: "<<msg<<endl;
     }
 
-    char decrypt(long int ch) {
-        long int temp=ch;
-        for(int i=1; i<d; i++)
+    char decrypt(ulint ch) {
+        ulint temp=ch;
+        for(int i = 1; i < d; i++)
             ch=(temp*ch)%n;
         return ch;
     }
@@ -106,23 +108,23 @@ public:
 
     void getMsg(){
         cout<<"Enter the message to encrypt: ";
-        cin>>msg;
+        cin.getline(msg,sizeof(msg)); 			// To take in spaces in the string.
         len = strlen(msg);
 
         // Encrypt text 1 char at a time, store it in cipher
-        for(int i=0; i<len; i++)
+        for(int i = 0; i < len; i++)
             cipher[i]=encrypt(msg[i]);
 
         cout<<"\nEncrypted message: ";
         
-        for(int i=0; i<len; i++)
-            cout<<cipher[i];
+        for(int i = 0; i < len; i++)
+            cout<<cipher[i]<<" ";
     }
 
     // Client encrypts with the public key of server (e) so only server can decrypt it using (d)
-    long int encrypt(char ch){
-        long int temp=ch;
-        for(int i=1; i<e; i++)
+    ulint encrypt(char ch){
+        ulint temp=ch;
+        for(int i = 1; i < e; i++)
             temp=(temp*ch)%n;
         return temp;
     }
