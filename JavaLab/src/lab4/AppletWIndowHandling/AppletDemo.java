@@ -1,6 +1,7 @@
 package lab4.AppletWIndowHandling;
 
 import java.applet.Applet;
+
 import java.awt.*;
 import java.awt.event.*;
 
