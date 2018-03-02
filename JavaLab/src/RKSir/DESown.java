@@ -64,6 +64,21 @@ public class DESown {
             21, 13, 5,  28, 20, 12, 4
     };
 
+    /**
+     * PC2 Permutation.  The subkey generation process applies this
+     * permutation to transform its running 56-bit keystuff value into
+     * the final set of 16 48-bit subkeys.
+     */
+    private static final byte[] PC2 = {
+            14, 17, 11, 24, 1,  5,
+            3,  28, 15, 6,  21, 10,
+            23, 19, 12, 4,  26, 8,
+            16, 7,  27, 20, 13, 2,
+            41, 52, 31, 37, 47, 55,
+            30, 40, 51, 45, 33, 48,
+            44, 49, 39, 56, 34, 53,
+            46, 42, 50, 36, 29, 32
+    };
     public long binStringToLong (String binString){
         // Replace the spaces
         binString = binString.replace(" ","");
@@ -110,6 +125,35 @@ public class DESown {
         return joined;
     }
 
+
+    /**
+     * This function generates 16 subkeys from the initial provided keys.
+     * Based on the current iteration number, the previous keys are either LShift'd 1 or 2 times.
+     * The new subkey is generated from the above operation.
+     */
+    private void generateSubkeys(long c0, long d0) {
+        for (int i = 1; i <= 16; i++) {
+            if ((i == 1) || (i == 2) || (i == 9) || (i == 16) ){
+                // rotate by 1 bit
+                c[i] = ((c[i-1]<<1) & 0x0FFFFFFF) | (c[i-1]>>27);
+                d[i] = ((d[i-1]<<1) & 0x0FFFFFFF) | (d[i-1]>>27);
+            }
+            else {
+                // rotate by 2 bits
+                c[i] = ((c[i-1]<<2) & 0x0FFFFFFF) | (c[i-1]>>26);
+                d[i] = ((d[i-1]<<2) & 0x0FFFFFFF) | (d[i-1]>>26);
+            }
+            // join the two keystuff halves together.
+            long cd = (c[i]&0xFFFFFFFFL)<<28 | (d[i]&0xFFFFFFFFL);
+            System.out.println("\n\nGenSubkeys: "+i);
+            displayLongValues(cd);
+
+            k_plus[i] = permute(PC2,56,cd);
+            System.out.println("Subkeys: "+i);
+            displayLongValues(k_plus[i]); // Should display 48-Bit numbers
+
+        }
+    }
     private void start() {
         String msg,key;
         long m,disp,l,r,k;
@@ -129,7 +173,7 @@ public class DESown {
         r = m<<32;
         displayLongValues(r);
 
-
+        // Step 1: Create 16 subkeys, each of which is 48-bits long.
         System.out.println("Enter key hex");
 //        key = scanner.nextLine();
         key = "133457799BBCDFF1";
@@ -153,7 +197,8 @@ public class DESown {
         displayLongValues(k_plus[0]);
 
 
-        // Now
+        // Now to get the remaining 16 subkeys
+        generateSubkeys(c[0],d[0]);
 
     }
 
