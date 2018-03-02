@@ -45,6 +45,7 @@ public class DESown {
 
     private long c[] = new long[17];
     private long d[] = new long[17];
+    private long k_plus[] = new long[17];
 
     /**
      * PC1 Permutation.  The supplied 64-bit key is permuted according
@@ -97,14 +98,16 @@ public class DESown {
     }
 
     /**
-     * Since c[i] and d[i] are 28 bits instead of long's 64 bit.
-     * So C leftshifted by 28 bits.
-     * D is rightshifted by 36 bits so that the first bit of D
-     * is at the same position as the first 0 of C.
+     * c[i] and d[i] are 28 bits instead of long's 64 bit.
+     * So C leftshifted by 28 bits, keeping first 8 bits of a long intact.
+     * Since C is 28 bit long the first 4bits are always 0,
+     * these get added to the leftshift and hence there are 8 0's int he beginning.
+     * D's first bit is at the same position as the first 0 of C. (ie 33rd bit of long)
      * Now we can perform OR to get the final key again.
      */
     private long getKPlus(long c, long d) {
-        return (c<<28 | d>>36);
+        long joined = (c&0xFFFFFFFFL)<<28 | (d&0xFFFFFFFFL);
+        return joined;
     }
 
     private void start() {
@@ -133,19 +136,24 @@ public class DESown {
         k = hexStringToLong(key);
         displayLongValues(k);
 
-        long k_plus = permute(PC1,64,k);
+        k_plus[0] = permute(PC1,64,k);
         System.out.println("\nk_plus:");
-        displayLongValues(k_plus);
+        displayLongValues(k_plus[0]);
 
         System.out.println("Splitting keys: ");
-        c[0] = k_plus>>28;
-        d[0] = k_plus<<36;
-        k_plus = getKPlus(c[0],d[0]);
+        // First half
+        c[0] = k_plus[0]>>28;
+        // Second half, only final 7 bits are identical (7*f).
+        d[0] = (k_plus[0]&0x0FFFFFFF);
+        k_plus[0] = getKPlus(c[0],d[0]);
         System.out.println("c: ");
         displayLongValues(c[0]);
         System.out.println("d: ");
         displayLongValues(d[0]);
-        displayLongValues(k_plus);
+        displayLongValues(k_plus[0]);
+
+
+        // Now
 
     }
 
