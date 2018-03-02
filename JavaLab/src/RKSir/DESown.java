@@ -96,10 +96,17 @@ public class DESown {
         return dst;
     }
 
+    /**
+     * Since c[i] and d[i] are 28 bits instead of long's 64 bit.
+     * So C leftshifted by 28 bits.
+     * D is rightshifted by 36 bits so that the first bit of D
+     * is at the same position as the first 0 of C.
+     * Now we can perform OR to get the final key again.
+     */
     private long getKPlus(long c, long d) {
         return (c<<28 | d>>36);
     }
-    
+
     private void start() {
         String msg,key;
         long m,disp,l,r,k;
