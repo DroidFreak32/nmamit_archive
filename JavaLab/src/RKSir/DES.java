@@ -16,6 +16,8 @@ package RKSir;
  * limitations under the License.
  */
 
+import java.math.BigInteger;
+import java.nio.charset.Charset;
 import java.util.Arrays;
 
 /**
@@ -541,9 +543,10 @@ public class DES {
     }
 
     public static boolean test(byte[] message, byte[] expected, String password) {
-        return test(message, expected, passwordToKey(password));
+        byte[] b = password.getBytes(Charset.forName("UTF-8"));
+        return test(message, expected, b);
     }
-    
+
     private static int testCount = 0;
     public static boolean test(byte[] message, byte[] expected, byte[] key) {
         System.out.println("Test #"+(++testCount)+":");
@@ -563,12 +566,12 @@ public class DES {
         // conversations observed between a VNC client and server. 
         test(
             parseBytes("a4b2 c9ef 0876 c1ce 438d e282 3820 dbde"),
-            parseBytes("fa60 69b9 85fa 1cf7 0bea a041 9137 a6d3"),
+            parseBytes("b0d8 ef25 dda2 565a 46c9 469b f3ac 097c"),
             "mypass"
         );
         test(
             parseBytes("f3ed a6dc f8b7 9dd6 5be0 db8b 1e7b a551"),
-            parseBytes("b669 d033 6c3f 42b7 68e8 e937 b4a5 7546"),
+            parseBytes("22 6D 1A CE 49 68 F8 13 6B F7 56 26 5B DD 5B 93"),
             "mypass"
         );
 
