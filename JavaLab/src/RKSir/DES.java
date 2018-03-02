@@ -525,7 +525,7 @@ public class DES {
             return 0;
         }
     }
-    private static byte[] parseBytes(String s) {
+    private static byte[] hexStringTohexBytes(String s) {
         s = s.replace(" ", "");
         byte[] ba = new byte[s.length()/2];
         if (s.length()%2 > 0) { s = s+'0'; }
@@ -543,12 +543,18 @@ public class DES {
     }
 
     public static boolean test(byte[] message, byte[] expected, String password) {
+
+        String hexString = "133457799BBCDFF1";
+        byte[] yourBytes = new BigInteger(hexString, 16).toByteArray(); // Converts the string with HEX values to a byte with those values
+
+
         byte[] b = password.getBytes(Charset.forName("UTF-8"));
         return test(message, expected, b);
     }
 
     private static int testCount = 0;
     public static boolean test(byte[] message, byte[] expected, byte[] key) {
+
         System.out.println("Test #"+(++testCount)+":");
         System.out.println("\tmessage:  "+hex(message));
         System.out.println("\tkey:      "+hex(key));
@@ -565,13 +571,13 @@ public class DES {
         // These tests were derived from the password challenge-response
         // conversations observed between a VNC client and server. 
         test(
-            parseBytes("a4b2 c9ef 0876 c1ce 438d e282 3820 dbde"),
-            parseBytes("b0d8 ef25 dda2 565a 46c9 469b f3ac 097c"),
+            hexStringTohexBytes("a4b2 c9ef 0876 c1ce 438d e282 3820 dbde"),
+            hexStringTohexBytes("b0d8 ef25 dda2 565a 46c9 469b f3ac 097c"),
             "mypass"
         );
         test(
-            parseBytes("f3ed a6dc f8b7 9dd6 5be0 db8b 1e7b a551"),
-            parseBytes("22 6D 1A CE 49 68 F8 13 6B F7 56 26 5B DD 5B 93"),
+            hexStringTohexBytes("f3ed a6dc f8b7 9dd6 5be0 db8b 1e7b a551"),
+            hexStringTohexBytes("22 6D 1A CE 49 68 F8 13 6B F7 56 26 5B DD 5B 93"),
             "mypass"
         );
 
@@ -581,9 +587,9 @@ public class DES {
         // DES calculations:
         //     http://orlingrabbe.com/des.htm
         test(
-            parseBytes("0123456789ABCDEF"),
-            parseBytes("85E813540F0AB405"),
-            parseBytes("133457799BBCDFF1")
+            hexStringTohexBytes("0123456789ABCDEF"),
+            hexStringTohexBytes("85E813540F0AB405"),
+            hexStringTohexBytes("133457799BBCDFF1")
         );
         
     }
