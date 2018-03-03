@@ -70,10 +70,44 @@ class testfuncs {
         System.out.println("Hex value: "+Long.toHexString(disp));
     }
     public static void main(String[] args) {
-
+        Scanner scanner = new Scanner(System.in);
         testfuncs obj1 = new testfuncs();
-        obj1.startMain();
+//        obj1.startMain();
+        String str;
+        str = scanner.nextLine();
+        int strlength = str.length();
+        System.out.println(str.length());
+        if (strlength >16 ){
 
+            int chunksRequired = (int) Math.ceil(strlength / (float)16);
+            String[] stringArray = new String[chunksRequired];
+            int lengthRemaining = strlength;
+            for (int i = 0; i < chunksRequired; i++)
+            {
+
+                int lengthToUse = min(lengthRemaining, 16);
+                int startIndex = 16 * i;
+
+                stringArray[i] = str.substring(startIndex, startIndex+lengthToUse);
+
+                lengthRemaining = lengthRemaining - lengthToUse;
+
+            }
+            for (int i = 0; i < stringArray.length; i++) {
+                System.out.println("SubString: "+(i+1)+" Length :"+stringArray.length);
+                System.out.println(stringArray[i]);
+
+            }
+        }
+
+
+    }
+
+    private static int min(int a, int b) {
+        if (a<b)
+            return a;
+        else
+            return b;
     }
 
 }

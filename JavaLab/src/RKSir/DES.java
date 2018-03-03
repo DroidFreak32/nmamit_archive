@@ -41,6 +41,11 @@ import java.util.Arrays;
  * 
  */
 public class DES {
+
+    public static void displayLongValues(long disp){
+        System.out.println("Long value: "+disp);
+        System.out.println("Hex value: "+Long.toHexString(disp));
+    }
     
     //////////////////////////////////////////////////////////////////////
     //
@@ -250,19 +255,7 @@ public class DES {
         return dst;
     }
 
-    /**
-     * Permute the supplied 6-bit value based on the S-Box at the
-     * specified box number.  (Box numbers start at 1, to be consistent
-     * with the literature.)
-     */
-    private static byte S(int boxNumber, byte src) {
-        // The first and last bits determine which 16-value row to
-        // reference, so we transform the 6-bit input into an
-        // absolute index based on the following bit shuffle:
-        // abcdef => afbcde
-        src = (byte) (src&0x20 | ((src&0x01)<<4) | ((src&0x1E)>>1));
-        return S[boxNumber-1][src];
-    }
+
     
     /**
      * Utility method to convert 8 bytes (starting at the specified
@@ -308,6 +301,19 @@ public class DES {
     //
     //////////////////////////////////////////////////////////////////////
 
+    /**
+     * Permute the supplied 6-bit value based on the S-Box at the
+     * specified box number.  (Box numbers start at 1, to be consistent
+     * with the literature.)
+     */
+    private static byte S(int boxNumber, byte src) {
+        // The first and last bits determine which 16-value row to
+        // reference, so we transform the 6-bit input into an
+        // absolute index based on the following bit shuffle:
+        // abcdef => afbcde
+        src = (byte) (src&0x20 | ((src&0x01)<<4) | ((src&0x1E)>>1));
+        return S[boxNumber-1][src];
+    }
     /**
      * The Feistel function is the heart of DES.
      */
@@ -396,7 +402,10 @@ public class DES {
         
         // reverse the two 32-bit segments (left to right; right to left)
         long rl = (r&0xFFFFFFFFL)<<32 | (l&0xFFFFFFFFL);
-        
+
+        System.out.println("\n\nR and L 16:");
+        displayLongValues(l);
+        displayLongValues(r);
         // apply the final permutation
         long fp = FP(rl);
         
