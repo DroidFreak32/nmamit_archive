@@ -16,6 +16,7 @@ package RKSir;
  * limitations under the License.
  */
 
+import java.math.BigInteger;
 import java.util.Scanner;
 
 /**
@@ -46,7 +47,8 @@ public class DESown {
     private long l[] = new long[17];
     private long r[] = new long[17];
     private  String msg,key;
-    private long msgLong,keyLong,ipmsg;
+    private String cipherText = "";
+    private long msgLong,keyLong,ipmsg,cipherTextLong;
 
 
     /**
@@ -106,7 +108,8 @@ public class DESown {
     public long hexStringToLong (String binString){
         // Replace the spaces
         binString = binString.replace(" ","");
-        return Long.parseLong(binString,16);
+        BigInteger bigInteger = new BigInteger(binString,16);
+        return bigInteger.longValue();
     }
 
 
@@ -260,7 +263,7 @@ public class DESown {
         newsrc = (byte) (src&0x20); // Get the first bit and make it newsrc's first
         newsrc = (byte) (newsrc | ((src&0x01)<<4)); // get the 6th bit, leftshift it by 4 bits to make it newsrc's 2nd char
         newsrc = (byte) (newsrc | ((src&0x1E)>>1)); // get the 2-5 bits, shift them all 1 bit to the right to make it newsrc's 3-6 bit resp.
-        System.out.println("BoxNo = "+boxNumber);
+//        System.out.println("BoxNo = "+boxNumber);
         return SBox[boxNumber-1][newsrc];
     }
 
@@ -302,7 +305,7 @@ public class DESown {
         long e,k_xor_e,sBoxOutPut;
 
         e = permute(E,32,r__n_minus_1);
-        System.out.println("\nXOR OPERATION: "+Long.toString(e)+" XOR "+Long.toString(k_plus_n));
+//        System.out.println("\nXOR OPERATION: "+Long.toString(e)+" XOR "+Long.toString(k_plus_n));
         k_xor_e = k_plus_n ^ e;
 
         sBoxOutPut = getSBoxOutput(k_xor_e);
@@ -325,7 +328,11 @@ public class DESown {
             33, 1, 41, 9, 49, 17, 57, 25
     };
 
-    private void des(){
+    private Long des(String msg){
+
+
+        msgLong = hexStringToLong(msg);
+        displayLongValues(msgLong);
         // Now to get the remaining 16 subkeys
         generateSubkeys(c[0],d[0]);
 
@@ -337,7 +344,7 @@ public class DESown {
         // Split IPmsg to 2 halves
         l[0] = (long) (ipmsg>>>32);
         r[0] =  (ipmsg&0xFFFFFFFFL);
-        System.out.println("\nTwoHalves ");
+//        System.out.println("\nTwoHalves ");
         displayLongValues(l[0]);
         displayLongValues(r[0]);
 
@@ -346,9 +353,9 @@ public class DESown {
         // reverse the two 32-bit segments (left to right; right to left)
         long rl = (r[16]&0xFFFFFFFFL)<<32 | (l[16]&0xFFFFFFFFL);
 
-        System.out.println("\n\n\n\nR16,l16");
-        displayLongValues(r[16]);
-        displayLongValues(l[16]);
+//        System.out.println("\n\n\n\nR16,l16");
+//        displayLongValues(r[16]);
+//        displayLongValues(l[16]);
 
 
         // apply the final permutation
@@ -356,11 +363,47 @@ public class DESown {
 
         System.out.println("\n\n\nFINAL: ");
         displayLongValues(fp);
+
+        return fp;
+
     }
     private void start() {
-        int msglength = msg.length();
+        String partMsg;
+        int strlength = msg.length();
+        System.out.println(msg.length());
+        if (strlength > 16 ){
 
-        des();
+            int chunksRequired = (int) Math.ceil(strlength / (float)16);
+            String[] stringArray = new String[chunksRequired];
+            int lengthRemaining = strlength;
+            for (int i = 0; i < chunksRequired; i++)
+            {
+
+                int lengthToUse = min(lengthRemaining, 16);
+                int startIndex = 16 * i;
+
+                stringArray[i] = msg.substring(startIndex, startIndex+lengthToUse);
+
+                lengthRemaining = lengthRemaining - lengthToUse;
+
+            }
+            for (int i = 0; i < stringArray.length; i++) {
+                partMsg = stringArray[i];
+                int len = partMsg.length();
+                if(len < 16)
+                    for (int j = 0; j < (16-len); j++)
+                        partMsg = partMsg + "0";
+                cipherTextLong = des(partMsg);
+                System.out.println("\n\n\n\n\n\n\n\n String Array: "+(i+1)+": "+partMsg);
+                cipherText += Long.toHexString(cipherTextLong);
+            }
+        }
+        else {
+            System.out.println("Message: "+msg);
+            cipherTextLong = des(msg);
+            cipherText = Long.toHexString(cipherTextLong);
+        }
+        System.out.println("\n\n\n\nCipherText: "+cipherText);
 
     }
 
@@ -370,32 +413,30 @@ public class DESown {
 
 // Step 1: Create 16 subkeys, each of which is 48-bits long.
         System.out.println("Enter equiv hex");
-//        msg = scanner.nextLine();
-        msg = "0123456789ABCDEF";
-        msgLong = hexStringToLong(msg);
-        displayLongValues(msgLong);
+        msg = scanner.nextLine();
+//        msg = "0123456789ABCDEF";
 
         System.out.println("Enter key hex");
 //        key = scanner.nextLine();
         key = "133457799BBCDFF1";
         keyLong = hexStringToLong(key);
-        displayLongValues(keyLong);
+//        displayLongValues(keyLong);
 
         k_plus[0] = permute(PC1,64,keyLong);
-        System.out.println("\nk_plus:");
-        displayLongValues(k_plus[0]);
+//        System.out.println("\nk_plus:");
+//        displayLongValues(k_plus[0]);
 
-        System.out.println("Splitting keys: ");
+//        System.out.println("Splitting keys: ");
         // First half
         c[0] = k_plus[0]>>>28;
         // Second half, only final 7 bits are identical (7*f).
         d[0] = (k_plus[0]&0x0FFFFFFF);
         k_plus[0] = getKPlus(c[0],d[0]);
-        System.out.println("c: ");
-        displayLongValues(c[0]);
-        System.out.println("d: ");
-        displayLongValues(d[0]);
-        displayLongValues(k_plus[0]);
+//        System.out.println("c: ");
+//        displayLongValues(c[0]);
+//        System.out.println("d: ");
+//        displayLongValues(d[0]);
+//        displayLongValues(k_plus[0]);
         start();
     }
 
@@ -405,5 +446,11 @@ public class DESown {
         obj1.getData();
     }
 
+    public int min (int n1, int n2){
+        if (n1 < n2)
+            return n1;
+        else
+            return n2;
+    }
 
 }
