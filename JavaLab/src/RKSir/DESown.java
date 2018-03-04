@@ -116,6 +116,15 @@ public class DESown {
     public String toHex(String s){
         return String.format("%x", new BigInteger(1, s.getBytes(Charset.defaultCharset())));
     }
+
+    public String padZeroes(String partMsg) {
+        int len = partMsg.length();
+        if(len < 16)
+            for (int j = 0; j < (16-len); j++)
+               partMsg = partMsg + "0";
+        return partMsg;
+    }
+
     private void displayLongValues(long disp){
         System.out.println("Long value: "+disp);
         System.out.println("Hex value: "+Long.toHexString(disp));
@@ -169,12 +178,12 @@ public class DESown {
             }
             // join the two keystuff halves together.
             long cd = (c[i]&0xFFFFFFFFL)<<28 | (d[i]&0xFFFFFFFFL);
-            System.out.println("\n\nGenSubkeys: "+i);
-            displayLongValues(cd);
+//            System.out.println("\n\nGenSubkeys: "+i);
+//            displayLongValues(cd);
 
             k_plus[i] = permute(PC2,56,cd);
-            System.out.println("Subkeys: "+i);
-            displayLongValues(k_plus[i]); // Should display 48-Bit numbers
+//            System.out.println("Subkeys: "+i);
+//            displayLongValues(k_plus[i]); // Should display 48-Bit numbers
 
         }
     }
@@ -335,21 +344,21 @@ public class DESown {
 
 
         msgLong = hexStringToLong(msg);
-        displayLongValues(msgLong);
+//        displayLongValues(msgLong);
         // Now to get the remaining 16 subkeys
         generateSubkeys(c[0],d[0]);
 
         // Step 2: Encode each 64-bit block of data.
         ipmsg = permute(IP,64, msgLong);
-        System.out.println("\n\nIP message:");
-        displayLongValues(ipmsg);
+//        System.out.println("\n\nIP message:");
+//        displayLongValues(ipmsg);
 
         // Split IPmsg to 2 halves
         l[0] = (long) (ipmsg>>>32);
         r[0] =  (ipmsg&0xFFFFFFFFL);
 //        System.out.println("\nTwoHalves ");
-        displayLongValues(l[0]);
-        displayLongValues(r[0]);
+//        displayLongValues(l[0]);
+//        displayLongValues(r[0]);
 
         generateEncryptedSubkeys();
 
@@ -373,7 +382,6 @@ public class DESown {
     private void start() {
         String partMsg;
         int strlength = msg.length();
-        System.out.println(msg.length());
         if (strlength > 16 ){
 
             int chunksRequired = (int) Math.ceil(strlength / (float)16);
@@ -392,16 +400,13 @@ public class DESown {
             }
             for (int i = 0; i < stringArray.length; i++) {
                 partMsg = stringArray[i];
-                int len = partMsg.length();
-                if(len < 16)
-                    for (int j = 0; j < (16-len); j++)
-                        partMsg = partMsg + "0";
+                partMsg = padZeroes(partMsg);
                 cipherTextLong = des(partMsg);
-                System.out.println("\n\n\n\n\n\n\n\n String Array: "+(i+1)+": "+partMsg);
                 cipherText += Long.toHexString(cipherTextLong);
             }
         }
         else {
+            msg = padZeroes(msg);
             System.out.println("Message: "+msg);
             cipherTextLong = des(msg);
             cipherText = Long.toHexString(cipherTextLong);
