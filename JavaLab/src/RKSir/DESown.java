@@ -17,6 +17,7 @@ package RKSir;
  */
 
 import java.math.BigInteger;
+import java.nio.charset.Charset;
 import java.util.Scanner;
 
 /**
@@ -112,7 +113,9 @@ public class DESown {
         return bigInteger.longValue();
     }
 
-
+    public String toHex(String s){
+        return String.format("%x", new BigInteger(1, s.getBytes(Charset.defaultCharset())));
+    }
     private void displayLongValues(long disp){
         System.out.println("Long value: "+disp);
         System.out.println("Hex value: "+Long.toHexString(disp));
@@ -415,6 +418,9 @@ public class DESown {
         System.out.println("Enter equiv hex");
         msg = scanner.nextLine();
 //        msg = "0123456789ABCDEF";
+        System.out.println("OrigMsg: "+msg);
+        msg = toHex(msg);
+        System.out.println("Now: "+msg);
 
         System.out.println("Enter key hex");
 //        key = scanner.nextLine();
