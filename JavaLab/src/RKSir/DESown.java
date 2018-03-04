@@ -16,8 +16,15 @@ package RKSir;
  * limitations under the License.
  */
 
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.math.BigInteger;
 import java.nio.charset.Charset;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Scanner;
 
 /**
@@ -415,46 +422,59 @@ public class DESown {
 
     }
 
-    private void getData() {
+    private void getData() throws IOException {
 
         Scanner scanner = new Scanner(System.in);
+        Path currentRelativePath = Paths.get("");
+        String s = currentRelativePath.toAbsolutePath().toString();
+        System.out.println("Current path is: " + s);
 
 // Step 1: Create 16 subkeys, each of which is 48-bits long.
-        System.out.println("Enter equiv hex");
-        msg = scanner.nextLine();
-//        msg = "0123456789ABCDEF";
-        System.out.println("OrigMsg: "+msg);
-        msg = toHex(msg);
-        System.out.println("Now: "+msg);
+        System.out.println("Enter the file path: ");
+        String msgFilePath = scanner.nextLine();
 
+//        msg = "0123456789ABCDEF";
         System.out.println("Enter key hex");
 //        key = scanner.nextLine();
         key = "133457799BBCDFF1";
         keyLong = hexStringToLong(key);
 //        displayLongValues(keyLong);
 
-        k_plus[0] = permute(PC1,64,keyLong);
+        k_plus[0] = permute(PC1, 64, keyLong);
 //        System.out.println("\nk_plus:");
 //        displayLongValues(k_plus[0]);
 
 //        System.out.println("Splitting keys: ");
         // First half
-        c[0] = k_plus[0]>>>28;
+        c[0] = k_plus[0] >>> 28;
         // Second half, only final 7 bits are identical (7*f).
-        d[0] = (k_plus[0]&0x0FFFFFFF);
-        k_plus[0] = getKPlus(c[0],d[0]);
+        d[0] = (k_plus[0] & 0x0FFFFFFF);
+        k_plus[0] = getKPlus(c[0], d[0]);
 //        System.out.println("c: ");
 //        displayLongValues(c[0]);
 //        System.out.println("d: ");
 //        displayLongValues(d[0]);
 //        displayLongValues(k_plus[0]);
-        start();
+
+        BufferedReader reader = new BufferedReader(new FileReader(msgFilePath));
+        msg = reader.readLine();
+        while (msg != null) {
+            System.out.println("OrigMsg: " + msg);
+            msg = toHex(msg);
+            System.out.println("Now: " + msg);
+            start();
+            msg = reader.readLine();
+        }
     }
 
 
     public static void main(String[] args) {
         DESown obj1 = new DESown();
-        obj1.getData();
+        try {
+            obj1.getData();
+        } catch (IOException ex){
+            System.out.println("IO Exception");
+        }
     }
 
     public int min (int n1, int n2){
