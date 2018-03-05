@@ -18,10 +18,10 @@ package RKSir;
 
 import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.math.BigInteger;
+import java.nio.MappedByteBuffer;
+import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -49,6 +49,7 @@ import java.util.Scanner;
  */
 public class DESown {
 
+    private final int BYTE_BUFFER = 16;
     private long c[] = new long[17];
     private long d[] = new long[17];
     private long k_plus[] = new long[17];
@@ -380,23 +381,23 @@ public class DESown {
         // apply the final permutation
         long fp = permute(FP,64,rl);
 
-        System.out.println("\n\n\nFINAL: ");
-        displayLongValues(fp);
+//        System.out.println("\n\n\nFINAL: ");
+//        displayLongValues(fp);
 
         return fp;
 
     }
     private void start() {
+        cipherText = "";
         String partMsg;
         int strlength = msg.length();
         if (strlength > 16 ){
-
+            System.out.println("MSGLENGTH: "+strlength);
             int chunksRequired = (int) Math.ceil(strlength / (float)16);
             String[] stringArray = new String[chunksRequired];
             int lengthRemaining = strlength;
             for (int i = 0; i < chunksRequired; i++)
             {
-
                 int lengthToUse = min(lengthRemaining, 16);
                 int startIndex = 16 * i;
 
@@ -406,19 +407,27 @@ public class DESown {
 
             }
             for (int i = 0; i < stringArray.length; i++) {
+
+                System.out.println("\nSPLIT "+i);
                 partMsg = stringArray[i];
                 partMsg = padZeroes(partMsg);
                 cipherTextLong = des(partMsg);
-                cipherText += Long.toHexString(cipherTextLong);
+                String temp = Long.toHexString(cipherTextLong);
+                if (temp.length() == 15)
+                    temp = '0'+temp;
+                cipherText += temp;
+
+//                System.out.println("cipher: "+cipherText);
             }
         }
         else {
             msg = padZeroes(msg);
-            System.out.println("Message: "+msg);
+//            System.out.println("Message: "+msg);
             cipherTextLong = des(msg);
             cipherText = Long.toHexString(cipherTextLong);
+
         }
-        System.out.println("\n\n\n\nCipherText: "+cipherText);
+
 
     }
 
@@ -456,15 +465,42 @@ public class DESown {
 //        displayLongValues(d[0]);
 //        displayLongValues(k_plus[0]);
 
-        BufferedReader reader = new BufferedReader(new FileReader(msgFilePath));
-        msg = reader.readLine();
-        while (msg != null) {
-            System.out.println("OrigMsg: " + msg);
+        BufferedWriter writer = new BufferedWriter(new FileWriter("desenc.dat"));
+        File file = new File(msgFilePath);
+        byte[] readBytes = new byte[BYTE_BUFFER];
+        RandomAccessFile data = new RandomAccessFile(file, "r");
+        long endPos = data.length(); // determine file length
+        long lastPos = endPos; // initialize lastPos to end of file
+        long pos = 0;
+
+        System.out.println(data.length());
+        for (long i = 0, len = (long) Math.ceil(data.length() /(double) BYTE_BUFFER); i < len; i++) {
+
+            data.seek(pos);
+            lastPos = pos;
+
+            if ((endPos - lastPos) < 16){
+                int remBytes = (int) (endPos - lastPos);
+                readBytes = new byte[(remBytes)];
+                data.readFully(readBytes);
+                pos += remBytes;
+            }
+            else {
+                data.readFully(readBytes);
+                pos += 16;
+            }
+            msg = new String(readBytes, Charset.defaultCharset());
             msg = toHex(msg);
-            System.out.println("Now: " + msg);
+
             start();
-            msg = reader.readLine();
+            msg = "";
+
+            writer.write(cipherText);
+            writer.newLine();
+
         }
+        data.close();
+        writer.close();
     }
 
 
@@ -473,7 +509,7 @@ public class DESown {
         try {
             obj1.getData();
         } catch (IOException ex){
-            System.out.println("IO Exception");
+            System.out.println("IO Exception: "+ex);
         }
     }
 
