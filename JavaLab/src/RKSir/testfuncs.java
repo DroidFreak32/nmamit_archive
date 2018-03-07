@@ -3,7 +3,10 @@ package RKSir;
 import com.sun.org.apache.xerces.internal.impl.dv.util.HexBin;
 
 import javax.xml.bind.DatatypeConverter;
+import java.io.*;
 import java.math.BigInteger;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.nio.*;
@@ -22,6 +25,50 @@ class testfuncs {
         return Long.parseLong(binString,16);
     }
 
+
+
+
+
+    private static void dump1() {
+        Scanner scanner = new Scanner(System.in);
+        testfuncs obj1 = new testfuncs();
+//        obj1.startMain();
+        String str;
+        str = scanner.nextLine();
+        int strlength = str.length();
+        System.out.println(str.length());
+        if (strlength >16 ){
+
+            int chunksRequired = (int) Math.ceil(strlength / (float)16);
+            String[] stringArray = new String[chunksRequired];
+            int lengthRemaining = strlength;
+            for (int i = 0; i < chunksRequired; i++)
+            {
+
+                int lengthToUse = min(lengthRemaining, 16);
+                int startIndex = 16 * i;
+
+                stringArray[i] = str.substring(startIndex, startIndex+lengthToUse);
+
+                lengthRemaining = lengthRemaining - lengthToUse;
+
+            }
+            for (int i = 0; i < stringArray.length; i++) {
+                System.out.println("SubString: "+(i+1)+" Length :"+stringArray.length);
+                System.out.println(stringArray[i]);
+
+            }
+        }
+
+
+    }
+
+    private static int min(int a, int b) {
+        if (a<b)
+            return a;
+        else
+            return b;
+    }
 
     private void startMain() {
         Scanner scanner = new Scanner(System.in);
@@ -69,45 +116,82 @@ class testfuncs {
         System.out.println("Long value: "+disp);
         System.out.println("Hex value: "+Long.toHexString(disp));
     }
+
+
+
+
+
+
+
+
+
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        testfuncs obj1 = new testfuncs();
-//        obj1.startMain();
-        String str;
-        str = scanner.nextLine();
-        int strlength = str.length();
-        System.out.println(str.length());
-        if (strlength >16 ){
+//        dump1();
+//        dump2();
+        int a = 0x0;
+        int b = 0x0;
+        long XOR[][] = new long[256][256];
 
-            int chunksRequired = (int) Math.ceil(strlength / (float)16);
-            String[] stringArray = new String[chunksRequired];
-            int lengthRemaining = strlength;
-            for (int i = 0; i < chunksRequired; i++)
-            {
-
-                int lengthToUse = min(lengthRemaining, 16);
-                int startIndex = 16 * i;
-
-                stringArray[i] = str.substring(startIndex, startIndex+lengthToUse);
-
-                lengthRemaining = lengthRemaining - lengthToUse;
-
+        while (a <= 255) {
+            while (b <= 255) {
+//                System.out.println(Integer.toHexString(a) + " (" + Integer.toBinaryString(a) + ") XOR "
+//                        + Integer.toHexString(b) + " (" + Integer.toBinaryString(b) + ")");
+//                System.out.println(Integer.toHexString(a ^ b) + " (" + Integer.toBinaryString(a ^ b) + ")\n\n");
+                XOR[a][b] = (a^b);
+                b++;
             }
-            for (int i = 0; i < stringArray.length; i++) {
-                System.out.println("SubString: "+(i+1)+" Length :"+stringArray.length);
-                System.out.println(stringArray[i]);
+            System.out.println("increment a");
+            a++;
+            b = 0x0;
 
+        }
+        System.out.println("TABLE: ");
+        for (int i = 0x0; i < XOR.length; i++) {
+            System.out.println();
+            for (int j = 0; j < XOR.length; j++) {
+                System.out.print(Long.toHexString(XOR[i][j])+"\t");
             }
+
         }
 
+        long temp1 = 0x7456;
+        long temp2 = 0x3246;
+        long x,y,ANS=0,temp;
+
+        System.out.println("\nActual: "+ Long.toHexString(temp1^temp2));
+        System.out.println("Manual: ");
+        long x1 = temp1%256;
+        long y1 = temp2%256;
+        System.out.println(Long.toHexString(x1));
+        System.out.println(Long.toHexString(y1));
+        System.out.println(Long.toHexString(XOR[(int)x1][(int)y1]));
 
     }
 
-    private static int min(int a, int b) {
-        if (a<b)
-            return a;
-        else
-            return b;
-    }
+    public static void dump2() {
+            int i;
+            Path currentRelativePath = Paths.get("");
+            String s = currentRelativePath.toAbsolutePath().toString();
+            System.out.println("Current path is: " + s);
+            BufferedReader reader = null;
+            try {
+                reader = new BufferedReader(new FileReader("../../../test.cpp"));
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+            try {
+                s = reader.readLine();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            while (s != null) {
+                System.out.println(s);
+                try {
+                    s = reader.readLine();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
 
 }

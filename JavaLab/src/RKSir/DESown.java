@@ -392,7 +392,7 @@ public class DESown {
         String partMsg;
         int strlength = msg.length();
         if (strlength > 16 ){
-            System.out.println("MSGLENGTH: "+strlength);
+//            System.out.println("MSGLENGTH: "+strlength);
             int chunksRequired = (int) Math.ceil(strlength / (float)16);
             String[] stringArray = new String[chunksRequired];
             int lengthRemaining = strlength;
@@ -408,7 +408,7 @@ public class DESown {
             }
             for (int i = 0; i < stringArray.length; i++) {
 
-                System.out.println("\nSPLIT "+i);
+//                System.out.println("\nSPLIT "+i);
                 partMsg = stringArray[i];
                 partMsg = padZeroes(partMsg);
                 cipherTextLong = des(partMsg);
@@ -467,34 +467,32 @@ public class DESown {
 
         BufferedWriter writer = new BufferedWriter(new FileWriter("desenc.dat"));
         File file = new File(msgFilePath);
-        byte[] readBytes = new byte[BYTE_BUFFER];
+        byte[] readBytes;
         RandomAccessFile data = new RandomAccessFile(file, "r");
         long endPos = data.length(); // determine file length
         long lastPos = endPos; // initialize lastPos to end of file
         long pos = 0;
 
         System.out.println(data.length());
-        for (long i = 0, len = (long) Math.ceil(data.length() /(double) BYTE_BUFFER); i < len; i++) {
-
+        for (long i = pos; i < endPos; i+=16) {
             data.seek(pos);
-            lastPos = pos;
-
-            if ((endPos - lastPos) < 16){
-                int remBytes = (int) (endPos - lastPos);
-                readBytes = new byte[(remBytes)];
-                data.readFully(readBytes);
+            if (pos+16 > endPos){
+                int remBytes = (int) (endPos - pos);
+                readBytes= new byte[remBytes];
                 pos += remBytes;
             }
             else {
-                data.readFully(readBytes);
-                pos += 16;
+                readBytes = new byte[BYTE_BUFFER];
+                pos += BYTE_BUFFER;
             }
+            data.readFully(readBytes);
             msg = new String(readBytes, Charset.defaultCharset());
+            System.out.println("msg:\n" +msg);
             msg = toHex(msg);
-
             start();
             msg = "";
-
+            System.out.println("----\nCipherText: "+cipherText);
+            System.out.println("#####################################\n\n");
             writer.write(cipherText);
             writer.newLine();
 
