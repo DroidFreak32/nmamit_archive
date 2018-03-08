@@ -10,6 +10,7 @@ import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.nio.*;
+import java.time.*;
 class testfuncs {
 
 
@@ -153,19 +154,60 @@ class testfuncs {
             }
 
         }
-
-        long temp1 = 0x7456;
-        long temp2 = 0x3246;
         long x,y,ANS=0,temp;
+        long startTime = System.nanoTime();
+        long temp1 = Long.parseLong("01110010",2);
+        long temp2 = Long.parseLong("01010101",2);
+        System.out.println("Initial: ");
+        System.out.println(Long.toHexString(temp1));
+        System.out.println(Long.toHexString(temp2));
+        long tmp = temp1>>(4);
+        long tmp2 = temp2>>(4);
+        ANS |= XOR[(int)tmp][(int)tmp2];
+        ANS <<=8;
+        tmp = temp1;
+        tmp2 = temp2;
+        tmp2 = tmp2 & 0x0FFL;
+        tmp = tmp & 0x0FFL;
+        ANS |= XOR[(int)tmp][(int)tmp2];
+//        System.out.println(Long.toHexString(ANS));
+//        ANS <<=8;
+//        tmp = temp1>>(4*6);
+//        tmp2 = temp2>>(4*6);
+//        tmp2 = tmp2 & 0x0FFL;
+//        tmp = tmp & 0x0FFL;
+//        ANS |= XOR[(int)tmp][(int)tmp2];
+//        ANS <<=8;
+//        tmp = temp1>>(4*4);
+//        tmp2 = temp2>>(4*4);
+//        tmp2 = tmp2 & 0x0FFL;
+//        tmp = tmp & 0x0FFL;
+//        ANS |= XOR[(int)tmp][(int)tmp2];
+//        ANS <<=8;
+//        tmp = temp1>>(4*2);
+//        tmp2 = temp2>>(4*2);
+//        tmp2 = tmp2 & 0x0FFL;
+//        tmp = tmp & 0x0FFL;
+//        ANS |= XOR[(int)tmp][(int)tmp2];
+//        ANS <<=8;
+//        tmp2 = tmp2 & 0x0FFL;
+//        tmp = tmp & 0x0FFL;
+        ANS |= XOR[(int)tmp][(int)tmp2];
+        long endTime = System.nanoTime();
+        ANS <<=8;
+        System.out.println("Manual Time = "+(endTime-startTime));
 
-        System.out.println("\nActual: "+ Long.toHexString(temp1^temp2));
-        System.out.println("Manual: ");
+
+        startTime = System.nanoTime();
+        long ans2 = temp1^temp2;
+        endTime = System.nanoTime();
+        System.out.println("Actual Time = "+(endTime-startTime));
+
+
         long x1 = temp1%256;
         long y1 = temp2%256;
-        System.out.println(Long.toHexString(x1));
-        System.out.println(Long.toHexString(y1));
-        System.out.println(Long.toHexString(XOR[(int)x1][(int)y1]));
-
+        System.out.println(Long.toHexString(ANS));
+        System.out.println(Long.toHexString(temp1^temp2));
     }
 
     public static void dump2() {

@@ -21,7 +21,7 @@ class JDBCDemo
 		}
 		catch(ClassNotFoundException ex)
 		{
-			System.out.println("unable to lead driver");
+			System.out.println("unable to load driver");
 			System.exit(1);
 		}
 		stmt=link.createStatement();//step3
@@ -42,8 +42,8 @@ class JDBCDemo
 		Scanner reader=new Scanner(System.in);
 		System.out.println("enter usn");
 		String s=reader.next();
-		String search="SELECT * FROM Student WHERE USN='"+s+"'";
-		results=stmt.executeQuery(search);
+		String query="SELECT * FROM Student WHERE USN='"+s+"'";
+		results=stmt.executeQuery(query);
 		while(results.next()){
 			System.out.println("USN="+results.getString("USN"));
 			System.out.println("NAME="+results.getString("NAME"));
@@ -53,8 +53,17 @@ class JDBCDemo
                 "Number of Columns: "+meta.getColumnCount());
         for (int i = 0; i < meta.getColumnCount(); i++) {
             System.out.println("Column "+i+" Name: "+ meta.getColumnName(i+1));
-            System.out.println("Column "+i+" Type: "+ meta.getColumnName(i+1));
+            System.out.println("Column "+i+" Type: "+ meta.getColumnTypeName(i+1));
 
+        }
+        query = "UPDATE Student SET NAME='Pia' WHERE USN='4NM15CS103'";
+        stmt.executeUpdate(query);
+        System.out.println("Updated Table:");
+        query = "SELECT * FROM Student";
+        results=stmt.executeQuery(query);
+        while(results.next()){
+            System.out.println("USN="+results.getString("USN"));
+            System.out.println("NAME="+results.getString("NAME"));
         }
 		link.close();
 	}
