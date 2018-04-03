@@ -1,5 +1,24 @@
 # Java Lab Programs  
 
+### Commands to start mysql in your Linux environment (Tested on arch, should be similar on ubuntu)
+
+Make sure `mysqld` is installed on your system!!!
+
+JDBC Commands:
+
+```
+sudo systemctl start mysqld
+
+sudo mysql -u root -p exam
+```
+
+ In the program:
+
+```
+link=DriverManager.getConnection("jdbc:mysql://127.0.0.1/exam","root","password");//step2
+```
+
+
 ### Part A  
 
 
