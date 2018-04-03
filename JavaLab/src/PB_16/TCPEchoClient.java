@@ -32,8 +32,8 @@ public class TCPEchoClient {
         do {
             System.out.print("Enter message: ");
             message = userEntry.nextLine();
-            output.println(message); //Step 3.
-            response = input.nextLine(); //Step 3.
+            output.println(message); //Step 3. Send Server the message
+            response = input.nextLine(); //Step 3. Get server's response
             System.out.println("\nSERVER> " + response);
         } while (!message.equals("***CLOSE***"));
 

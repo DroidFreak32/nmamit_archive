@@ -27,15 +27,11 @@ public class TCPEchoServer {
         Scanner input = new Scanner(link.getInputStream());//Step 3.
         PrintWriter output = new PrintWriter(link.getOutputStream(), true); //Step 3.
         int numMessages = 0;
-        String msg = "TEST";
         String message = input.nextLine(); //Step 4.
-        Scanner reader = new Scanner(System.in);
-        msg = reader.nextLine();
         while (!message.equals("***CLOSE***")) {
             System.out.println("Message received.: " + message);
             numMessages++;
-            msg = reader.nextLine();
-            output.println("Message " + numMessages + ": " + msg); //Step 4.
+            output.println("Message " + numMessages + ": " + message); //Step 4.
             message = input.nextLine();
         }
         output.println(numMessages + " messages received.");//Step 4.
