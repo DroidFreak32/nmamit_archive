@@ -50,8 +50,8 @@ link=DriverManager.getConnection("jdbc:mysql://127.0.0.1/exam","root","password"
 
 11. Write a program to copy the contents of two files in to one file.   
 
-12. Write a Java program to perform the following operations in a Random Access File (assume three fields).    
-   i)Insert a Record ii)Display Records  
+##### 12. Write a Java program to perform the following operations in a Random Access File (assume three fields).    
+#####   i)Insert a Record ii)Display Records  
 
 13. Write a frame/Swing program that is having an radio buttons to draw circle, line, rectangle. Another set of radio buttons to choose the background color. The color of frame background should be set to the selected color.  
 
@@ -69,4 +69,4 @@ link=DriverManager.getConnection("jdbc:mysql://127.0.0.1/exam","root","password"
 
 17. Create a socket program using UDP sockets to send message between client and server.   
 
-18. Design a form using html which contains two text-boxes namely First name and Last name and a submit button.   After  entering values for text-boxes and clicking Submit button it should display first name and last name as a server response . Write a JSP code  for this scenario using GET or POST method .  
+##### 18. Design a form using html which contains two text-boxes namely First name and Last name and a submit button.   After  entering values for text-boxes and clicking Submit button it should display first name and last name as a server response . Write a JSP code  for this scenario using GET or POST method .  
