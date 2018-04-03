@@ -20,12 +20,21 @@ public class TabDemo extends JApplet
 	}
 	public void makeGUI()
 	{
+	    JFrame jf = new JFrame("Tabbed Pane");
+	    jf.setSize(500,500);
+	    jf.setLayout(new FlowLayout());
+	    jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		JTabbedPane jtp=new JTabbedPane();
 		jtp.addTab("Places",new CitiesPanel());
 		jtp.addTab("Colors",new ColorPanel());
 		jtp.addTab("Flavors",new FlavorPanel());
-		add(jtp);
+		jf.add(jtp);
 	}
+
+    public static void main(String[] args) {
+        TabDemo tb = new TabDemo();
+        tb.init();
+    }
 }
 class CitiesPanel extends JPanel implements TreeSelectionListener
 {
@@ -58,11 +67,11 @@ class CitiesPanel extends JPanel implements TreeSelectionListener
 }
 class ColorPanel extends JPanel implements ListSelectionListener
 {
-	public JList jlst;
+	public JList<String> jlst;
 	public String Colors[] ={"red","black","white"};
 	public ColorPanel()
 	{
-		jlst = new JList(Colors);  
+		jlst = new JList<>(Colors);
 		jlst.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		jlst.addListSelectionListener(this);
 		add(jlst);
@@ -75,10 +84,10 @@ class ColorPanel extends JPanel implements ListSelectionListener
 }
 class FlavorPanel extends JPanel implements ActionListener
 {
-	JComboBox jcb;
+	JComboBox<String> jcb;
 	public FlavorPanel()
 	{
-		jcb = new JComboBox();
+		jcb = new JComboBox<>();
 		jcb.addItem("Vanilla");
 		jcb.addItem("Chocolate");
 		jcb.addItem("Strawberry");

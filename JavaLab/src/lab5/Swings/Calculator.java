@@ -14,7 +14,7 @@ public class Calculator  extends JApplet implements ActionListener
 	public void init()
 	{
 		makeGUI();
-		b2.addActionListener(this);
+//		b2.addActionListener(this);
 	}
 	public void makeGUI()
 	{
@@ -64,7 +64,7 @@ public class Calculator  extends JApplet implements ActionListener
 			{
 				num3=num1-num2;
 			}
-			Integer intval = new Integer(num3);
+			Integer intval = num3;
 			s3 =  intval.toString();
 			tbox3.setText(s3);
 		}
