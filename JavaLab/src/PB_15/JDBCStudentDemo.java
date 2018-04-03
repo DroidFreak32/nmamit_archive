@@ -11,7 +11,7 @@ class dbdemo {
     dbdemo() throws SQLException {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://172.16.2.3/student", "student", "student");
+            con = DriverManager.getConnection("jdbc:mysql://127.0.0.1/exam", "root", "password");
         } catch (ClassNotFoundException e) {
             System.out.println("Unable to load the driver.")
             ;
@@ -36,17 +36,16 @@ class dbdemo {
         int usn = s.nextInt();
         System.out.println("Enter name");
         String name = s.next();
-        String sq = "INSERT INTO student VALUES(" + usn + ",'" + name + ")";
+        String sq = "INSERT INTO student VALUES(" + usn + ",'" + name + "')";
         int r = stm.executeUpdate(sq);
         System.out.println(r + " Row updated successfully "
         );
     }
 
     void createTable() throws SQLException {
-        String sq = "create table student( USN integer, name varchar(15))";
+        String sq = "create table student( USN integer, name varchar(15));";
         int r = stm.executeUpdate(sq);
-        System.out.println("Table created successfully.")
-        ;
+        System.out.println("Table created successfully.");
     }
 
     void searchtable() throws SQLException {
@@ -55,7 +54,9 @@ class dbdemo {
         int usn = s.nextInt();
         String a = "SELECT * FROM student where USN=" + usn;
         rs = stm.executeQuery(a);
-        System.out.println("Student name is " + rs.getString(2));
+        if(rs.next()) {
+            System.out.println("Student name is " + rs.getString(2));
+        }
     }
 
     void closecon() throws SQLException {
