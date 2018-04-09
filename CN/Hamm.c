@@ -3,19 +3,28 @@
 int power(int x, int y) 
 { 
 int i, res=1; 
-for(i=1;i<y;i++) 
-res=x*res; 
+for(i=1;i<=y;i++) 
+	res=x*res; 
+printf("pwr %d\n", res);
 return res; 
 } 
 main() 
 { int input[15],m,r=0,count=0,i=0,z=0,j=0,n,t[15],k=0,a,b,c,cnt=0,reg=0; 
+
+	for (int i = 0; i < 15; ++i)
+	{
+		input[i]=0;
+		t[i]=0;
+	}
 printf("\nenter the number of bits"); 
 scanf("%d",&m); 
 printf("\nenter the %d bits:",m); 
-for(i=m-1;i>=0;i--) 
+for(i=0;i<m;i++) 
 scanf("%d",&input[i]); 
-while(!(power(2,r)>=(m+r+1))) 
-{ r++; } 
+while(power(2,r)<(m+r+1)) 
+{ r++; 
+}
+printf("\nr = %d\n",r); 
 for(i=1;i<=(m+r);i++) 
 {  if(i==power(2,k)) 
 {   t[i]=0; 
@@ -25,27 +34,31 @@ else
 t[i]=input[j++]; 
 } 
 printf("\n the actual message is"); 
-for(i=(m+r);i>0;i--) 
-printf("%d",t[i]); 
+for(i=1;i<=(m+r);i++) 
+printf("\nt[i] = %d\n",t[i]); 
 n=1; 
 while(n<=power(2,r)) 
 {  i=n; 
 while(i<=m+r) 
 {   
+	printf("\ni = %d\n",i);
 		for(j=0;j<n;j++) 
 		{  
-			if((i+j)<=(m+r)&& t[i+j]==1) 
-		  	count++; 
+			if((i+j)<=(m+r)&& t[i+j]==1){ 
+		  		count++; 
+		  		printf("\ni+j = %d\n",i+j);
+		    }
 		} 
 	i=i+2*n; 
 } 
+printf("\ncount = %d\n",count);
 if(count%2 !=0) 
 t[n]=1; 
 n=n*2; 
 count=0; 
 } 
 printf("\ndata transmitted      ");
-for(i=(m+r);i>0;i--) 
+for(i=1;i<=(m+r);i++) 
 printf("%d",t[i]); 
 // printf("\nenter the data transmitted with one bit errror"); 
 // for(i=(m+r);i>0;i--) 
