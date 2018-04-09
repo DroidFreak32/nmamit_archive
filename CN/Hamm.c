@@ -5,7 +5,7 @@ int power(int x, int y)
 int i, res=1; 
 for(i=1;i<=y;i++) 
 	res=x*res; 
-printf("pwr %d\n", res);
+
 return res; 
 } 
 main() 
@@ -33,61 +33,63 @@ k++;
 else 
 t[i]=input[j++]; 
 } 
-printf("\n the actual message is"); 
+printf("\n the actual message is: "); 
 for(i=1;i<=(m+r);i++) 
-printf("\nt[i] = %d\n",t[i]); 
+printf("%d",t[i]); 
 n=1; 
 while(n<=power(2,r)) 
 {  i=n; 
 while(i<=m+r) 
 {   
-	printf("\ni = %d\n",i);
 		for(j=0;j<n;j++) 
 		{  
 			if((i+j)<=(m+r)&& t[i+j]==1){ 
 		  		count++; 
-		  		printf("\ni+j = %d\n",i+j);
 		    }
 		} 
 	i=i+2*n; 
 } 
-printf("\ncount = %d\n",count);
 if(count%2 !=0) 
 t[n]=1; 
 n=n*2; 
 count=0; 
 } 
-printf("\ndata transmitted      ");
+printf("\ndata transmitted       :");
 for(i=1;i<=(m+r);i++) 
 printf("%d",t[i]); 
-// printf("\nenter the data transmitted with one bit errror"); 
-// for(i=(m+r);i>0;i--) 
-// scanf("%d",&t[i]); 
-// for(i=(m+r);i>0;i--) 
-// printf("%d",t[i]); 
-// printf("\n the errored message is:"); 
-// for(i=(m+r);i>0;i--) 
-// printf("%d",t[i]); 
-// n=1; 
-// while(n<=power(2,r)) 
-// {  i=n; 
-// while(i<=m+r) 
-// {   for(j=0;j<n;j++) 
-// {  if((i+j)<=(m+r)&& t[i+j]==1) 
-//   cnt++; 
-// } 
-// i=i+2*n; 
-// } 
-// if(cnt%2 !=0) 
-// { reg+=n; } 
-// n=n*2; 
-// cnt=0; 
-// } 
-// if(reg==0) 
-// { 
-// printf("\nno error"); 
-// } 
-// else 
-// {printf("\nerror in position %d",reg); 
-// } 
+
+
+printf("\nenter the data transmitted with one bit errror"); 
+for(i=1;i<=(m+r);i++) 
+scanf("%d",&t[i]); 
+
+printf("\n the errored message is:"); 
+for(i=1;i<=(m+r);i++) 
+printf("%d",t[i]); 
+n=1; 
+while(n<=power(2,r)) 
+{  i=n; 
+while(i<=m+r) 
+{   for(j=0;j<n;j++) 
+{  if((i+j)<=(m+r)&& t[i+j]==1) 
+  cnt++; 
+} 
+i=i+2*n; 
+} 
+if(cnt%2 !=0) 
+{ reg+=n; } 
+n=n*2; 
+cnt=0; 
+} 
+if(reg==0) 
+{ 
+printf("\nno error"); 
+} 
+else 
+{printf("\nerror in position %d",reg); 
+    t[reg] = !(t[reg]);
+printf("\n the corrected message is:"); 
+for(i=1;i<=(m+r);i++) 
+printf("%d",t[i]); 
+} 
 }
