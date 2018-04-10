@@ -1,2 +1,2 @@
 a.out: $(FILE)
-	gcc "$(FILE)" -lGL -lGLU -lglut -lm
+	g++ "$(FILE)" -lGL -lGLU -lglut -lm
