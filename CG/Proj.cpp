@@ -1,6 +1,7 @@
 // Display point
 #include <GL/glut.h>
 #include <stdio.h>
+#include <string.h>
 using namespace std;
 
 void init()
@@ -140,10 +141,72 @@ void drawWall(){
         glVertex2d(900,300);
         glVertex2d(900,325);
     glEnd();
-
     glFlush();
 
 }
+
+void drawFactory(){
+
+    glColor3ub(33,33,33);
+    glBegin(GL_POLYGON);
+        glVertex2d(0,50);
+        glVertex2d(50,75);
+        glVertex2d(50,0);
+        glVertex2d(0,0);
+        glVertex2d(0,50);
+    glEnd();
+    glBegin(GL_POLYGON);
+        glVertex2d(50,50);
+        glVertex2d(100,70);
+        glVertex2d(100,0);
+        glVertex2d(50,0);
+        glVertex2d(50,50);
+    glEnd();
+    glBegin(GL_POLYGON);
+        glVertex2d(100,50);
+        glVertex2d(125,75);
+        glVertex2d(225,75);
+        glVertex2d(250,50);
+        glVertex2d(250,0);
+        glVertex2d(100,0);
+    glEnd();
+    glBegin(GL_POLYGON);
+        glVertex2d(175,0);
+        glVertex2d(175,100);
+        glVertex2d(200,100);
+        glVertex2d(200,0);
+    glEnd();
+    //tower
+    glBegin(GL_POLYGON);
+        glVertex2d(185,100);
+        glVertex2d(185,125);
+        glVertex2d(190,125);
+        glVertex2d(190,100);      
+    glEnd();
+
+}
+
+
+void drawText(char *string) {
+
+    //get the length of the string to display
+    int len = (int) strlen(string);
+
+    glColor3ub(255,20,20);
+
+    //set the position of the text in the window using the x and y coordinates
+    glRasterPos2i(100,800);
+
+    glDisable(GL_LIGHTING);
+    //loop to display character by character
+    for (int i = 0; i < len; i++){
+        glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24,string[i]);
+    }
+    glEnable(GL_LIGHTING);
+}
+
+
+
 
 void drawTriangle(int x, int y){
     clear_screen();
@@ -193,6 +256,10 @@ void menuActions(int value){
 }
  void display(){
     drawWall();
+    drawFactory();
+    char string[100]="Humpty Dumpty sat on a wall";
+    drawText(string);
+    glFlush();
  }
 int main(int argc,char *argv[]){
     glutInit(&argc,argv);
