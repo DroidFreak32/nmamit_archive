@@ -2,8 +2,14 @@
 #include <GL/glut.h>
 #include <stdio.h>
 #include <string.h>
+#include <fstream>
+#include <iostream>
+#include <stdlib.h>
+#include "RGBpixmap.h"
+#define OGL 1
 using namespace std;
 
+RGBpixmap pix[2];
 void init()
 {
     glClearColor(129/255.0f,212/255.0f,250/255.0f,1.0);
@@ -11,6 +17,8 @@ void init()
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     gluOrtho2D(0,1000,0,1000); // Left Right Bottom Top
+    glEnable(GL_ALPHA_TEST);
+    glAlphaFunc(GL_EQUAL, 1.0);
     glFlush();
 }
 //glutDisplayFunc(display_func_name) mandatory to invoke any function
@@ -50,7 +58,6 @@ void drawPolygon(int x, int y){
     glFlush();
 
 }
-
 //copy poly for wall
 void drawWall(){
 
@@ -181,7 +188,7 @@ void drawFactory(){
         glVertex2d(185,100);
         glVertex2d(185,125);
         glVertex2d(190,125);
-        glVertex2d(190,100);      
+        glVertex2d(190,100);
     glEnd();
 
 }
@@ -259,14 +266,18 @@ void menuActions(int value){
     drawFactory();
     char string[100]="Humpty Dumpty sat on a wall";
     drawText(string);
+    glRasterPos2i(400, 225);
+    pix[0].draw();
+    glutSwapBuffers();
     glFlush();
  }
 int main(int argc,char *argv[]){
     glutInit(&argc,argv);
-    glutInitDisplayMode(GLUT_RGB);
+    glutInitDisplayMode(GLUT_DOUBLE|GLUT_RGB);
     glutInitWindowSize(1000,1000);
     glutInitWindowPosition(0,0);
     glutCreateWindow("Basic Window");
+    pix[0].readBMPFile("HumptySitting.bmp",true);
     init();
     glutMouseFunc(mouse_func);
     glutKeyboardFunc(keyboard_func);
@@ -275,6 +286,7 @@ int main(int argc,char *argv[]){
     glutAttachMenu(GLUT_MIDDLE_BUTTON);
     glutAddMenuEntry("Display Rectangle", 1); //Name and Value. Value is sent to menuAction()
     glutAddMenuEntry("Exit", 2);
+
 
     glutMainLoop();
     return 0;
