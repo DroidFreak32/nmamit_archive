@@ -38,7 +38,7 @@ void matrix() {
         }
     }
 }
-main() {
+int main() {
     int i, j, k, x, t, cost = INFINITY;
     int n1, n2, final, t1, t2, next;
     printf("Enter the number of nodes:");

@@ -10,6 +10,7 @@ int xor(int x, int y) {
     x += y;
     if (x == 0 || x == 2)
         return 0;
+    else return 1;
 }
 
 void compcrc() {

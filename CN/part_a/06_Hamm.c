@@ -6,7 +6,7 @@
             res = x * res;
         return res;
     }
-main() {
+int main() {
     int input[15], m, r = 0, count = 0, i = 0, z = 0, j = 0, n, t[15], k = 0, a, b, c, cnt = 0, reg = 0;
 
     for (int i = 0; i < 15; ++i) {
