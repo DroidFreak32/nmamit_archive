@@ -4,13 +4,16 @@
 #define true 1
 #define false 0
 
-float p[4];
-float q[4];
-float r[4];
+float p[5];
+float q[5];
+float r[5];
 float u1=0,u2=1;
 
 float xmin=100,ymin=100,xmax=200,ymax=200;
-float x0=50,y0=50,x1=250,y1=250;
+float x0=50,y0=50,x1=150,y1=150;
+// float x0=50,y0=50,x1=250,y1=250;
+// float x0=110,y0=110,x1=140,y1=140;
+// float x0=50,y0=250,x1=250,y1=250;
 
 void drawRekt(int trans){
     glLineWidth(3);
@@ -66,8 +69,10 @@ void barskyClip(){
     q[4] = ymax-y0;
 
     for(int i=1;i<=4;i++)
-      if(p[i]==0 && q[i]<0)
+      if(p[i]==0 && q[i]<0){
           reject = true;
+          printf("Rejected\n");
+      }
 
     if(reject!=true){
         for(int j=1;j<=4;j++)
@@ -78,7 +83,7 @@ void barskyClip(){
             else
                 u2 = min(u2,r[k]);
         }
-    
+    }
         if(u1>u2)
            reject = true;
 
@@ -93,15 +98,26 @@ void barskyClip(){
             drawRekt(200);
             drawLine(200);
        }
-    }
+    
 }
 
-int init(){
-	glClearColor(0,0,0,0.5);
-	glClear(GL_COLOR_BUFFER_BIT);
-    glMatrixMode(GL_PROJECTION);
+void init(int w,int h) {
+	float aspect=(float) w/h;
+	glClearColor(1.0,1.0,1.0,1.0);
+	glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+	glViewport(0,0,w,h);
+	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	gluOrtho2D(0,500,0,500);
+	
+	if(w>=h)
+	    glOrtho(-2.0*aspect,2.0*aspect,-2.0,2.0,2.0,-2.0);
+	else
+	    glOrtho(-2.0,2.0,-2.0/aspect,2.0/aspect,2.0,-2.0);
+    glMatrixMode(GL_PROJECTION);
+    gluOrtho2D(0,1000,0,1000);
+	// glMatrixMode(GL_MODELVIEW);
+	// glutSwapBuffers();
+    glutPostRedisplay();
 }
 
 void display(){
@@ -114,12 +130,12 @@ void display(){
 
 int main(int argc, char *argv[]){
     glutInit(&argc,argv);
-	glutInitWindowSize(600,800);
+	glutInitWindowSize(1000,1000);
 	glutInitWindowPosition(0,0);
 	glutCreateWindow("Liang Barsky");
 	glutInitDisplayMode(GLUT_SINGLE|GLUT_RGBA);
     glutDisplayFunc(display);
-	init();
+	glutReshapeFunc(init);
 	glutMainLoop();
 	return 0;
 }

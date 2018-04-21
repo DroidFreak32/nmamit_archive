@@ -2,12 +2,32 @@
 #include <stdio.h>
 
 
-void init()
-{
-      glClearColor(1.0, 1.0, 1.0, 1.0);
-      glClear(GL_COLOR_BUFFER_BIT); 
-      glMatrixMode(GL_PROJECTION);
-      gluOrtho2D(0, 10, 0, 10);
+// void init()
+// {
+//       glClearColor(1.0, 1.0, 1.0, 1.0);
+//       glClear(GL_COLOR_BUFFER_BIT); 
+//       glMatrixMode(GL_PROJECTION);
+//       gluOrtho2D(0, 10, 0, 10);
+// }
+
+void init(int w,int h) {
+	float aspect=(float) w/h;
+	glClearColor(1.0,1.0,1.0,1.0);
+	glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+	glViewport(0,0,w,h);
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	
+	if(w>=h)
+	    glOrtho(-2.0*aspect,2.0*aspect,-2.0,2.0,2.0,-2.0);
+	else
+	    glOrtho(-2.0,2.0,-2.0/aspect,2.0/aspect,2.0,-2.0);
+    glMatrixMode(GL_PROJECTION);
+    gluOrtho2D(0,10,0,10);
+	// glMatrixMode(GL_MODELVIEW);
+	// glutSwapBuffers();
+      glutPostRedisplay();
+
 }
 
 void triangle(float *a,float *b, float *c)
@@ -66,8 +86,7 @@ void main(int argc, char** argv)
     glutInit(&argc,argv);
     glutInitWindowSize(500,500); 
     glutCreateWindow("Sierpinski Gasket"); 
-    init();
-    glutReshapeFunc(myReshape);
+    glutReshapeFunc(init);
     glutDisplayFunc(display); 
     
     glutMainLoop(); 

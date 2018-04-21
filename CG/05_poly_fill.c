@@ -4,14 +4,31 @@
 
 int x1=200, y1=200, x2=100, y2=300, x3=200, y3=400, x4=300, y4=300;
 int le[501], re[501];
-void init(){
-    glClearColor(0,0,0,0.5);
-    glClear(GL_COLOR_BUFFER_BIT);
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
-    gluOrtho2D(0,500,0,500);
-}
+// void init(){
+//     glClearColor(0,0,0,0.5);
+//     glClear(GL_COLOR_BUFFER_BIT);
+//     glMatrixMode(GL_PROJECTION);
+//     glLoadIdentity();
+//     gluOrtho2D(0,500,0,500);
+// }
 
+void init(int w,int h) {
+	float aspect=(float) w/h;
+	glClearColor(1.0,1.0,1.0,1.0);
+	glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+	glViewport(0,0,w,h);
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	
+	if(w>=h)
+	    glOrtho(-2.0*aspect,2.0*aspect,-2.0,2.0,2.0,-2.0);
+	else
+	    glOrtho(-2.0,2.0,-2.0/aspect,2.0/aspect,2.0,-2.0);
+    glMatrixMode(GL_PROJECTION);
+    gluOrtho2D(0,w,0,h);
+	// glMatrixMode(GL_MODELVIEW);
+	// glutSwapBuffers();
+}
 
 void edgeDetect(int x1, int y1, int x2, int y2){
     int i,y;
@@ -81,7 +98,7 @@ int main(int argc, char *argv[]){
     glutInitWindowSize(600,800);
     glutInitWindowPosition(0,0);
     glutCreateWindow("Poly Fill");
-    init();
+    glutReshapeFunc( init);
     glutDisplayFunc(display);
     glutMainLoop();
     return 0;
