@@ -1,4 +1,5 @@
-To run, execute the following in a *NIX environment. (Assuming you have OpenGL libraries installed)
+To run, execute the following in a *NIX environment. (Assuming you have OpenGL libraries installed)  
+
   `g++ RGBpixmap.cpp Proj.cpp -lGL -lGLU -lglut -lm -std=c++0x -lpthread`
   
 
