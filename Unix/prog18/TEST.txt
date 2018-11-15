@@ -1,0 +1,125 @@
+#!/usr/bin/perl
+@dept_arr=<>;
+for($i=0;$i<3;$i++)
+{
+	print("Enter the code to be searched :");
+	chop($code=<STDIN>);
+	@found_arr=grep(/^$code/,@dept_arr);
+	if(length($code)==0 || code eq "")
+	{
+		print("Code not found\n");
+		next;
+	}
+	($code,$desc)=split(/\|/,$found_arr[0]);
+	print(" Code = $code Description = $desc");
+}	
+#!/usr/bin/perl
+while(<>)
+{
+	chop;
+	@field=split(/\|/);
+	if(1..4)
+	{
+		$dept=$field[2];
+		$name=$field[1];
+		$salary=$field[5];
+		($f_name, $l_name)=split(/ +/,$name);
+		$name=$l_name . "," . $f_name;
+		$total+=$salary;
+		printf("%d\t%s\t%s\t%d\n",$.,$name,$dept,$salary);
+	}
+}
+printf("%s\t%d\n","Total salary = ",$total);
+#!/usr/bin/perl
+foreach $num(@ARGV)
+{
+	$temp=$num;
+	until($num==0)
+	{
+		$bit=$num%2;
+		unshift(@bit_arr,$bit);
+		$num=int($num/2);
+	}
+	$binary_num=join(" ",@bit_arr);
+	print("Binary form of $temp = $binary_num\n");
+	$#bit_arr=-1;
+}
+
+#!/usr/bin/perl
+while(<>)
+{
+chop;
+@field=split(/\|/);
+if(1..4)
+{
+$dept=$field[2];
+$name=$field[1];
+$salary=$field[5];
+($f_name,$l_name)=split(/ +/,$name);
+$name=$l_name.",".$f_name;
+$total+=$salary;
+print "$.\t$name\t$dept\t$salary\n";
+}
+}
+print "Total salary is $total\n";
+#!/usr/bin/perl
+print("Enter the string :\n");
+$a=<STDIN>;
+print("Enter the number of times to be displayed :\n");
+chop($b=<STDIN>);
+$c=$a x $b;
+print("Result :\n$c");
+#!/usr/bin/perl
+foreach $num(@ARGV)
+{
+ $originalno=$num;
+$sum=0;
+ until($num==0)
+ {
+  $digit=$num%10;
+  $sum=$sum+$digit;
+ $num=int($num/10);
+}
+print "Sum of digits of $originalno is $sum \n";
+}
+
+#!/usr/bin/perl
+@dept_arr=<>;
+for($i=0;$i<3;$i++)
+{
+print("Enter the code to look up");
+chop($code=<STDIN>);
+@found_arr=grep(/^$code/,@dept_arr);
+if($#found_arr==-1 || $code eq "\n")
+{
+print("Code not found");
+next;
+}
+($code,$desc)=split(/\|/,$found_arr[0]);
+print("CODE=$code  DESCRIPTION=$desc");
+}
+
+#!/usr/bin/perl
+print "Enter the string:";
+$a=<STDIN>;
+print "Enter the number of times the string should be displayed:";
+chop($b=<STDIN>);
+$c=$a x $b;
+print "RESULT IS:\n$c";
+
+
+
+
+#!/usr/bin/perl
+foreach $num(@ARGV)
+{
+	$n=$num;
+	until($num==0)
+	{
+		$digit=$num%10;
+		$sum=$sum+$digit;
+		$num=int($num/10);
+	}
+	print("Sum of the digits of $n = $sum\n");
+	$sum=0;
+}
