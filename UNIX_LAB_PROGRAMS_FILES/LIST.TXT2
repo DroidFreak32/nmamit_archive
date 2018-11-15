@@ -1,0 +1,111 @@
+PART – A ( SHELL )
+
+
+1.Write a shell program to find and display largest and smallest of three numbers
+
+
+2. Write a shell program to check the number n is divisible by m or not. Where m and n are 
+supplied as command line argument or read from key board interactively.
+
+
+3. Write a shell program to check the year is the leap year or not. Display appropriate message.
+
+
+4. Write a shell program to search a pattern in a file that will take both pattern and file name 
+from the command line arguments.  Write a second shell program to read the pattern and the file 
+name from the key board interactively if the pattern and file names are not passed in command 
+line arguments. If they are passed in command line argument, then the variables pattern and file 
+name are set to these values. Finally invoke the first shell file to search a pattern in the file if the 
+file exists.
+
+
+5. Write a shell program that takes two file names, checks the permissions for these files are 
+identical and if they are identical, output the common permissions; otherwise output each file 
+name followed by its permissions.
+
+
+6. Write a shell program to display the length of the name and also display first three characters 
+and last three characters in the name in two different lines if the name contains at least 6 
+characters.
+
+
+7. Write a shell program to implement simple calculator operations.
+
+
+8. Write a Shell Program that takes the any number of arguments and print them in same order 
+and in reverse order with suitable messages. ( For example, if the script m named rargs, then 
+executing rargs A B C should produce A B C  and  C B A on the standard output).
+
+
+9. Shell script that accepts path names and creates all the components in that path names as 
+directories. For ex, if the script name is mpe, then the command mpe a/b/c/d should create 
+directories a, a/b, a/b/c, and a/b/c/d.
+
+
+10. Shell script that accepts valid log-in names as arguments and prints their corresponding home 
+directories. If no arguments are specified, print a suitable error message.
+
+
+11.Write a shell script that accepts filename as arguments. For every filename, it should first 
+check whether it exists in the current directory and then convert its name  to uppercase, but only 
+if a file with new name doesnt exist.
+
+
+12. Write shell script to determine the length of the string, extract a substring and locate a 
+position of a character in a string.
+
+PART – B ( PERL )
+
+
+
+13. Write a PERL program to convert a decimal number (supplied as argument) to an unsigned 
+binary number (for example if the argument is 22, then the output should be 10110). If an 
+argument is present, it can be a valid decimal number and if no argument is present, the program 
+should display an error message.
+
+
+14. PERL program to read a dept code from KB and search this code in the file dept.lst. The file 
+dept.lst is passed through the command line argument.
+
+
+15. Write a PERL program that prompts user to input the string and a number, and prints the 
+string that many times, with each string on separate line.
+
+
+16. Write a PERL program to read a database file from command line and print name given in 
+file with last name shown before the first name. Print total of salary field for selected lines.
+
+
+17. PERL program to find the sum of digits of an unsigned number passed through argument.
+
+
+
+PART – B ( AWK )
+
+
+
+18. Create a file “emp.lst” and store the employee records in the following form: 
+emp_num |  emp_name | emp_designation | emp_department | emp_DOJ  | emp_salary
+                                                        (dd/mm/yy)
+Write an awk code to calculate and display the salary, DA, HRA and gross pay for individual 
+employees and the average salary, average DA, average gross pay and average HRA. For every 
+individual employees, calculate DA=50% of Salary. HRA = 15% of Salary. 
+Gross Pay = Salary + DA + HRA. 
+
+
+19.A file contains a fixed number of fields in the form of space-delimited numbers. Write an awk 
+program to print the lines as well as total of its rows.
+
+
+20.Write a awk script that folds long line into 15 columns. Thus any line that exceeds 15 
+characters  must be broken after 15th and is to be continued  with the residue. The inputs to be 
+supplied through a text file created by the user.
+
+
+21.Write an awk program to provide extra symbol( i.e. * or @ ) at the end of the line(if required) 
+so that the line length is maintained as 127.
+
+
+22. Write a shell script that uses awk to find total size of all ordinary files owned by user(which 
+could be anywhere in the system), whose name is specified as argument. First check whether 
+user is available in /etc/passwd.
