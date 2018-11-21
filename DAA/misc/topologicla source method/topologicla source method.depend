@@ -1,0 +1,10 @@
+# depslib dependency file v1.0
+1456723157 source:/home/student/kumar sarthi/topologicla source method/main.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+
+1457685403 source:/home/student/Desktop/topologicla source method/main.c
+	<stdio.h>
+	<stdlib.h>
+

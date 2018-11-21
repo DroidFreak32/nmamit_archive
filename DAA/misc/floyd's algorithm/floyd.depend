@@ -1,0 +1,31 @@
+# depslib dependency file v1.0
+1457600167 source:/home/student/Desktop/sada/floyd/main.c
+	<stdio.h>
+	<stdlib.h>
+	<sys/time.h>
+	<math.h>
+
+1457600167 source:/home/student/Desktop/floyd's algorithm/main.c
+	<stdio.h>
+	<stdlib.h>
+	<sys/time.h>
+	<math.h>
+
+1457761362 source:d:\ \floyd's algorithm\main.c
+	<stdio.h>
+	<stdlib.h>
+	<sys/time.h>
+	<math.h>
+
+1457761362 source:h:\study materials\daa lab\floyd's algorithm\main.c
+	<stdio.h>
+	<stdlib.h>
+	<sys/time.h>
+	<math.h>
+
+1490378141 source:d:\bwp\new folder\daa lab\floyd's algorithm\main.c
+	<stdio.h>
+	<stdlib.h>
+	<sys/time.h>
+	<math.h>
+

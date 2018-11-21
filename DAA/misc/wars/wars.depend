@@ -1,0 +1,12 @@
+# depslib dependency file v1.0
+1489812451 source:/home/student/Desktop/cs148/wars/main.c
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+
+1490377200 source:c:\users\lenovo\music\new folder\singly linked list\wars\main.c
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	<sys/time.h>
+
