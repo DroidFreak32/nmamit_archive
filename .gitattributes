@@ -1,0 +1,5 @@
+*.rar -delta
+*.pdf -delta
+*.pptx -delta
+*.ppt -delta
+. !text !filter !merge !diff
